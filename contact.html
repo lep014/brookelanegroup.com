@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact | Brooke Lane Group</title>
+<meta name="description" content="Get in touch with Brooke Lane Group. Reach out directly or send us a message — introductions and referrals are always welcome.">
+<link rel="canonical" href="https://www.brookelanegroup.com/contact">
+<meta name="theme-color" content="#181D31">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Brooke Lane Group">
+<meta property="og:title" content="Contact | Brooke Lane Group">
+<meta property="og:description" content="Reach out directly or send us a message — introductions and referrals are always welcome.">
+<meta property="og:url" content="https://www.brookelanegroup.com/contact">
+<meta property="og:image" content="https://www.brookelanegroup.com/assets/img/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body id="top">
+
+<!-- ===================== Navigation ===================== -->
+<header class="nav">
+  <div class="nav__inner">
+    <a class="brand" href="index.html" aria-label="Brooke Lane Group home">
+      <img class="brand__mark" src="assets/img/bl-monogram.png" alt="Brooke Lane Group">
+      <span class="brand__name">Brooke<br>Lane</span>
+    </a>
+    <button class="nav__toggle" aria-label="Menu" aria-expanded="false" aria-controls="primary-menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav__menu" id="primary-menu">
+      <a class="nav__link" href="index.html">Home</a>
+      <a class="nav__link" href="index.html#who-we-are">Who We Are</a>
+      <a class="nav__link" href="index.html#how-we-help">How We Help</a>
+      <a class="nav__link" href="index.html#who-we-are-for">Who We Are For</a>
+      <a class="nav__link" href="index.html#our-values">Our Values</a>
+      <a class="btn btn--teal nav__cta" href="contact.html">Get In Touch</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ===================== Page header ===================== -->
+<section class="page-header">
+  <div class="container">
+    <h1>Ready When You Are</h1>
+  </div>
+</section>
+
+<!-- ===================== Contact ===================== -->
+<section class="section">
+  <div class="container">
+    <div class="contact__grid">
+
+      <div class="contact__intro reveal">
+        <p class="eyebrow">Get In Touch</p>
+        <h2 class="heading heading--md">Let's start a conversation</h2>
+        <p>If you'd like to learn more about us or simply want to bounce ideas around, we'd love to connect. Reach out directly or fill out the contact form.</p>
+        <p class="contact__note">Introductions and referrals are always welcome.</p>
+
+        <div class="contact__details">
+          <div class="contact__detail">
+            <h4>Phone</h4>
+            <a href="tel:+18177653636">817 765 3636</a>
+          </div>
+          <div class="contact__detail">
+            <h4>Email</h4>
+            <a href="mailto:info@brookelanegroup.com">info@brookelanegroup.com</a>
+          </div>
+          <div class="contact__detail">
+            <h4>Address</h4>
+            <a href="https://maps.google.com/?q=3723+Greenville+Ave+STE+95702+Dallas+TX+75206" target="_blank" rel="noopener">3723 Greenville Ave STE 95702, Dallas, TX 75206</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact form.
+           To activate: create a free form at https://formspree.io, then
+           replace YOUR_FORM_ID below with the ID it gives you. -->
+      <form class="form-card reveal" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <p class="eyebrow">Contact Us</p>
+
+        <div class="field">
+          <label for="name">Full Name <span class="req">*</span></label>
+          <input type="text" id="name" name="name" autocomplete="name" required>
+        </div>
+
+        <div class="field">
+          <label for="email">Email <span class="req">*</span></label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel">
+        </div>
+
+        <div class="field">
+          <label for="country">Country</label>
+          <select id="country" name="country">
+            <option value="United States" selected>United States</option>
+            <option value="Canada">Canada</option>
+            <option value="United Kingdom">United Kingdom</option>
+            <option value="Australia">Australia</option>
+            <option value="Mexico">Mexico</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5"></textarea>
+        </div>
+
+        <div class="field field--check">
+          <input type="checkbox" id="sms-consent" name="sms_consent" value="yes">
+          <label for="sms-consent">I agree to receive text messages from Brooke Lane regarding my inquiry. Message frequency varies. Msg &amp; data rates may apply. See our <a href="terms-of-service.html">Terms of Service</a> and <a href="privacy-policy.html">Privacy Policy</a>.</label>
+        </div>
+
+        <!-- spam honeypot — leave empty -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+
+        <p class="form-msg" id="form-msg" role="status" aria-live="polite" hidden></p>
+        <button type="submit" class="btn btn--teal">Submit</button>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== Footer ===================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__col">
+        <a class="brand" href="index.html" aria-label="Brooke Lane Group home">
+          <img class="brand__mark" src="assets/img/bl-monogram.png" alt="">
+          <span class="brand__name">Brooke<br>Lane</span>
+        </a>
+      </div>
+      <div class="footer__col">
+        <h4>Address</h4>
+        <p>3723 Greenville Ave STE 95702<br>Dallas, TX 75206</p>
+      </div>
+      <div class="footer__col">
+        <h4>Contact</h4>
+        <p><a href="mailto:info@brookelanegroup.com">info@brookelanegroup.com</a></p>
+      </div>
+      <div class="footer__col">
+        <h4>Follow</h4>
+        <a href="https://www.linkedin.com/company/brooke-lane/" target="_blank" rel="noopener" aria-label="Brooke Lane Group on LinkedIn">
+          <img class="footer__social" src="assets/img/linkedin.png" alt="LinkedIn">
+        </a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; 2025 Brooke Lane Group LLC. All Rights Reserved.</span>
+      <span class="footer__links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
