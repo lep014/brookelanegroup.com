@@ -544,6 +544,68 @@ p { font-size: var(--fs-body); }
 .legal a { color: var(--teal); text-decoration: underline; }
 
 /* ============================================================
+   Page Loader — "BROOKE LANE" collapses to "BL"
+   ============================================================ */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--navy-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity .6s ease, visibility .6s ease;
+}
+.loader.is-hidden { opacity: 0; visibility: hidden; }
+body.is-loading { overflow: hidden; }
+.loader__text {
+  font-family: var(--serif);
+  font-weight: 400;
+  color: var(--teal);
+  font-size: clamp(2.75rem, 10vw, 7rem);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: baseline;
+  white-space: nowrap;
+}
+.loader__char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.6em);
+  transition:
+    opacity .45s ease,
+    transform .55s cubic-bezier(.2,.7,.2,1);
+  white-space: pre;
+}
+.loader__char.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+.loader__char.is-out {
+  opacity: 0;
+  transform: translateY(-0.45em);
+}
+.loader__char.is-collapse {
+  font-size: 0 !important;
+  letter-spacing: 0 !important;
+  transition:
+    font-size .55s cubic-bezier(.7,0,.3,1),
+    letter-spacing .55s cubic-bezier(.7,0,.3,1),
+    opacity .35s ease,
+    transform .55s cubic-bezier(.2,.7,.2,1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .loader { transition: none; }
+  .loader__char {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================================================
    Reveal-on-scroll animation
    ============================================================ */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
