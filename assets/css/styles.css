@@ -591,27 +591,32 @@ body.is-loading { overflow: hidden; }
 }
 .loader.is-ready .loader__text { visibility: visible; }
 
-/* Monogram extensions: short horizontal strokes above the B and
-   below the L that draw in once "BL" has settled, echoing the brand
-   monogram on the site. */
-.loader__text::before,
-.loader__text::after {
-  content: "";
+/* Monogram resolve: after "BL" settles, fade the wordmark out and
+   fade the actual brand monogram in, anchored at the seam so the
+   panel split tears it cleanly along its midline. */
+.loader__text {
+  transition: opacity .4s ease;
+}
+.loader.is-monogram .loader__text { opacity: 0; }
+
+.loader__mark {
   position: absolute;
   left: 50%;
-  width: 2.4em;
-  height: 0.11em;
-  background: var(--white);
-  transform: translateX(-50%) scaleX(0);
-  transform-origin: center;
-  transition: transform .55s cubic-bezier(.65,0,.3,1);
+  width: clamp(7rem, 14vw, 10rem);
+  height: auto;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .5s ease .1s;
 }
-.loader__text::before { bottom: calc(100% + 0.16em); }
-.loader__text::after  { top: calc(100% + 0.06em); }
-.loader__text.is-monogram::before,
-.loader__text.is-monogram::after {
-  transform: translateX(-50%) scaleX(1);
+.loader__half--top .loader__mark {
+  bottom: 0;
+  transform: translate(-50%, 50%);
 }
+.loader__half--bot .loader__mark {
+  top: 0;
+  transform: translate(-50%, -50%);
+}
+.loader.is-monogram .loader__mark { opacity: 1; }
 /* Anchor each text copy so its visual mid-line sits at the panel
    boundary (screen center). 0.36em accounts for Mulish's cap-height
    not being centered in the line box. */

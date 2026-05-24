@@ -54,11 +54,10 @@
         var tOut       = HOLD;
         var tBl        = tOut + (nonKeep.length - 1) * STAGGER
                               + COLLAPSE_GAP + COLLAPSE_DUR;
-        var tMonogram  = tBl + 120;
+        var tMonogram  = tBl + 160;
         var tSweep     = tBl + BL_HOLD;
         var tOpen      = tSweep + SWEEP;
         var tReveal    = tOpen + OPEN;
-        var texts      = loader.querySelectorAll(".loader__text");
 
         nonKeep.forEach(function (charIdx, seq) {
           var dropAt     = tOut + seq * STAGGER;
@@ -74,7 +73,7 @@
         });
 
         setTimeout(function () {
-          texts.forEach(function (t) { t.classList.add("is-monogram"); });
+          loader.classList.add("is-monogram");
         }, tMonogram);
 
         setTimeout(function () {
