@@ -31,34 +31,42 @@
       fireLoaderDone();
     } else {
       document.body.classList.add("is-loading");
-      var chars = loader.querySelectorAll(".loader__char");
+      var topChars = loader.querySelectorAll(".loader__half--top .loader__char");
+      var botChars = loader.querySelectorAll(".loader__half--bot .loader__char");
       var bar  = document.getElementById("loader-bar");
 
-      var HOLD         = 900;   // static "Brooke Lane" on screen
-      var COLLAPSE_GAP = 320;   // gap between slide-down and width collapse
-      var COLLAPSE_DUR = 560;
-      var BL_HOLD      = 420;   // pause on "BL"
-      var SWEEP        = 700;   // bar grows L→R
-      var OPEN         = 750;   // panels slide apart
+      var nonKeep = [];
+      topChars.forEach(function (c, i) {
+        if (!c.hasAttribute("data-keep")) nonKeep.push(i);
+      });
 
-      var tOut      = HOLD;
-      var tCollapse = tOut + COLLAPSE_GAP;
-      var tBl       = tCollapse + COLLAPSE_DUR;
-      var tSweep    = tBl + BL_HOLD;
-      var tOpen     = tSweep + SWEEP;
-      var tReveal   = tOpen + OPEN;
+      var HOLD          = 800;   // static "Brooke Lane" on screen
+      var STAGGER       = 75;    // gap between consecutive letter drops
+      var COLLAPSE_GAP  = 240;   // delay between a letter dropping and its width collapsing
+      var COLLAPSE_DUR  = 520;
+      var BL_HOLD       = 460;
+      var SWEEP         = 700;
+      var OPEN          = 750;
 
-      setTimeout(function () {
-        chars.forEach(function (c) {
-          if (!c.hasAttribute("data-keep")) c.classList.add("is-out");
-        });
-      }, tOut);
+      var tOut       = HOLD;
+      var lastIdxAt  = (nonKeep.length - 1) * STAGGER;
+      var tBl        = tOut + lastIdxAt + COLLAPSE_GAP + COLLAPSE_DUR;
+      var tSweep     = tBl + BL_HOLD;
+      var tOpen      = tSweep + SWEEP;
+      var tReveal    = tOpen + OPEN;
 
-      setTimeout(function () {
-        chars.forEach(function (c) {
-          if (!c.hasAttribute("data-keep")) c.classList.add("is-collapse");
-        });
-      }, tCollapse);
+      nonKeep.forEach(function (charIdx, seq) {
+        var dropAt     = tOut + seq * STAGGER;
+        var collapseAt = dropAt + COLLAPSE_GAP;
+        setTimeout(function () {
+          if (topChars[charIdx]) topChars[charIdx].classList.add("is-out");
+          if (botChars[charIdx]) botChars[charIdx].classList.add("is-out");
+        }, dropAt);
+        setTimeout(function () {
+          if (topChars[charIdx]) topChars[charIdx].classList.add("is-collapse");
+          if (botChars[charIdx]) botChars[charIdx].classList.add("is-collapse");
+        }, collapseAt);
+      });
 
       setTimeout(function () {
         if (bar) bar.classList.add("is-sweep");
