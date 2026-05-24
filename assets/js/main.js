@@ -32,49 +32,40 @@
     } else {
       document.body.classList.add("is-loading");
       var chars = loader.querySelectorAll(".loader__char");
-      var text = document.getElementById("loader-text");
       var bar  = document.getElementById("loader-bar");
 
-      var INTRO_DELAY  = 150;
-      var STAGGER      = 50;
-      var HOLD         = 600;   // pause after full word
-      var COLLAPSE_GAP = 260;   // delay between fade-out and width collapse
-      var BL_HOLD      = 380;   // pause on "BL"
+      var HOLD         = 900;   // static "Brooke Lane" on screen
+      var COLLAPSE_GAP = 320;   // gap between slide-down and width collapse
+      var COLLAPSE_DUR = 560;
+      var BL_HOLD      = 420;   // pause on "BL"
       var SWEEP        = 700;   // bar grows L→R
-      var OPEN         = 650;   // bar expands top/bottom to fill
-      var typeDone     = INTRO_DELAY + chars.length * STAGGER + 420;
+      var OPEN         = 750;   // panels slide apart
 
-      var tCollapse = typeDone + HOLD;
-      var tShrink   = tCollapse + COLLAPSE_GAP;
-      var tBlSettled = tShrink + 550;
-      var tSweep    = tBlSettled + BL_HOLD;
+      var tOut      = HOLD;
+      var tCollapse = tOut + COLLAPSE_GAP;
+      var tBl       = tCollapse + COLLAPSE_DUR;
+      var tSweep    = tBl + BL_HOLD;
       var tOpen     = tSweep + SWEEP;
       var tReveal   = tOpen + OPEN;
-
-      chars.forEach(function (c, i) {
-        setTimeout(function () { c.classList.add("is-in"); },
-                   INTRO_DELAY + i * STAGGER);
-      });
 
       setTimeout(function () {
         chars.forEach(function (c) {
           if (!c.hasAttribute("data-keep")) c.classList.add("is-out");
         });
-      }, tCollapse);
+      }, tOut);
 
       setTimeout(function () {
         chars.forEach(function (c) {
           if (!c.hasAttribute("data-keep")) c.classList.add("is-collapse");
         });
-      }, tShrink);
+      }, tCollapse);
 
       setTimeout(function () {
-        if (text) text.classList.add("is-fading");
-        if (bar)  bar.classList.add("is-sweep");
+        if (bar) bar.classList.add("is-sweep");
       }, tSweep);
 
       setTimeout(function () {
-        if (bar) bar.classList.add("is-open");
+        loader.classList.add("is-opening");
       }, tOpen);
 
       setTimeout(function () {

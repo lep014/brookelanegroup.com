@@ -544,25 +544,40 @@ p { font-size: var(--fs-body); }
 .legal a { color: var(--teal); text-decoration: underline; }
 
 /* ============================================================
-   Page Loader — "Brooke Lane" collapses to "BL", then a navy
-   line sweeps across and opens to reveal the home page.
+   Page Loader — two green panels meet at the screen center
+   showing "Brooke Lane"; "rooke"/"ane" slide down into the
+   baseline; B and L slide together to form "BL"; a navy line
+   cuts left→right, then the panels open by sliding apart and
+   carrying the BL halves with them, revealing the home page.
    ============================================================ */
 .loader {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: var(--teal);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
-  transition: opacity .5s ease, visibility .5s ease;
+  transition: opacity .35s ease, visibility .35s ease;
 }
 .loader.is-hidden { opacity: 0; visibility: hidden; }
 body.is-loading { overflow: hidden; }
+
+.loader__half {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: var(--teal);
+  overflow: hidden;
+  transition: transform .75s cubic-bezier(.7,0,.3,1);
+  will-change: transform;
+}
+.loader__half--top { top: 0; }
+.loader__half--bot { top: 50%; }
+.loader.is-opening .loader__half--top { transform: translateY(-100%); }
+.loader.is-opening .loader__half--bot { transform: translateY(100%); }
+
 .loader__text {
-  position: relative;
-  z-index: 1;
+  position: absolute;
+  left: 50%;
   font-family: var(--sans);
   font-weight: 800;
   color: var(--white);
@@ -570,61 +585,60 @@ body.is-loading { overflow: hidden; }
   line-height: 1;
   letter-spacing: 0.005em;
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
   white-space: nowrap;
-  transition: opacity .35s ease;
 }
-.loader__text.is-fading { opacity: 0; }
+/* Anchor each text copy so its visual mid-line sits at the panel
+   boundary (screen center). 0.36em accounts for Mulish's cap-height
+   not being centered in the line box. */
+.loader__half--top .loader__text {
+  bottom: 0;
+  transform: translate(-50%, 0.36em);
+}
+.loader__half--bot .loader__text {
+  top: 0;
+  transform: translate(-50%, calc(-100% + 0.36em));
+}
+
 .loader__char {
   display: inline-block;
-  opacity: 0;
-  transform: translateY(0.6em);
+  overflow: hidden;
+  vertical-align: bottom;
+  line-height: 1;
   transition:
-    opacity .45s ease,
-    transform .55s cubic-bezier(.2,.7,.2,1);
+    font-size .55s cubic-bezier(.7,0,.3,1),
+    letter-spacing .55s cubic-bezier(.7,0,.3,1);
+}
+.loader__char-inner {
+  display: inline-block;
+  transition: transform .55s cubic-bezier(.6,0,.3,1);
   white-space: pre;
 }
-.loader__char.is-in {
-  opacity: 1;
-  transform: translateY(0);
-}
-.loader__char.is-out {
-  opacity: 0;
-  transform: translateY(-0.45em);
-}
+.loader__char.is-out .loader__char-inner { transform: translateY(110%); }
 .loader__char.is-collapse {
   font-size: 0 !important;
   letter-spacing: 0 !important;
-  transition:
-    font-size .55s cubic-bezier(.7,0,.3,1),
-    letter-spacing .55s cubic-bezier(.7,0,.3,1),
-    opacity .35s ease,
-    transform .55s cubic-bezier(.2,.7,.2,1);
 }
+
 .loader__bar {
   position: absolute;
   left: 0;
   top: 50%;
   width: 0;
-  height: 2px;
+  height: 3px;
   background: var(--navy-dark);
   transform: translateY(-50%);
   pointer-events: none;
-  z-index: 2;
-  transition:
-    width .7s cubic-bezier(.65,0,.35,1),
-    height .65s cubic-bezier(.85,0,.15,1);
+  z-index: 3;
+  transition: width .7s cubic-bezier(.65,0,.35,1);
 }
 .loader__bar.is-sweep { width: 100vw; }
-.loader__bar.is-sweep.is-open { height: 110vh; }
+
 @media (prefers-reduced-motion: reduce) {
-  .loader { transition: none; }
-  .loader__char {
-    transition: none;
-    opacity: 1;
-    transform: none;
+  .loader, .loader__half, .loader__char,
+  .loader__char-inner, .loader__bar {
+    transition: none !important;
   }
-  .loader__bar { transition: none; }
 }
 
 /* ============================================================
