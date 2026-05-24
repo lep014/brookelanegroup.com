@@ -587,7 +587,9 @@ body.is-loading { overflow: hidden; }
   display: flex;
   align-items: flex-end;
   white-space: nowrap;
+  visibility: hidden;
 }
+.loader.is-ready .loader__text { visibility: visible; }
 /* Anchor each text copy so its visual mid-line sits at the panel
    boundary (screen center). 0.36em accounts for Mulish's cap-height
    not being centered in the line box. */

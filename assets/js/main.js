@@ -28,9 +28,9 @@
 
     if (!forceLoader && (shownAlready || reducedMotion)) {
       loader.parentNode.removeChild(loader);
+      document.body.classList.remove("is-loading");
       fireLoaderDone();
     } else {
-      document.body.classList.add("is-loading");
       var topChars = loader.querySelectorAll(".loader__half--top .loader__char");
       var botChars = loader.querySelectorAll(".loader__half--bot .loader__char");
       var bar  = document.getElementById("loader-bar");
@@ -48,40 +48,55 @@
       var SWEEP         = 700;
       var OPEN          = 750;
 
-      var tOut       = HOLD;
-      var lastIdxAt  = (nonKeep.length - 1) * STAGGER;
-      var tBl        = tOut + lastIdxAt + COLLAPSE_GAP + COLLAPSE_DUR;
-      var tSweep     = tBl + BL_HOLD;
-      var tOpen      = tSweep + SWEEP;
-      var tReveal    = tOpen + OPEN;
+      function startSequence() {
+        loader.classList.add("is-ready");
 
-      nonKeep.forEach(function (charIdx, seq) {
-        var dropAt     = tOut + seq * STAGGER;
-        var collapseAt = dropAt + COLLAPSE_GAP;
+        var tOut       = HOLD;
+        var tReveal    = tOut
+                       + (nonKeep.length - 1) * STAGGER
+                       + COLLAPSE_GAP + COLLAPSE_DUR
+                       + BL_HOLD + SWEEP + OPEN;
+        var tSweep     = tReveal - OPEN - SWEEP;
+        var tOpen      = tReveal - OPEN;
+
+        nonKeep.forEach(function (charIdx, seq) {
+          var dropAt     = tOut + seq * STAGGER;
+          var collapseAt = dropAt + COLLAPSE_GAP;
+          setTimeout(function () {
+            if (topChars[charIdx]) topChars[charIdx].classList.add("is-out");
+            if (botChars[charIdx]) botChars[charIdx].classList.add("is-out");
+          }, dropAt);
+          setTimeout(function () {
+            if (topChars[charIdx]) topChars[charIdx].classList.add("is-collapse");
+            if (botChars[charIdx]) botChars[charIdx].classList.add("is-collapse");
+          }, collapseAt);
+        });
+
         setTimeout(function () {
-          if (topChars[charIdx]) topChars[charIdx].classList.add("is-out");
-          if (botChars[charIdx]) botChars[charIdx].classList.add("is-out");
-        }, dropAt);
+          if (bar) bar.classList.add("is-sweep");
+        }, tSweep);
+
         setTimeout(function () {
-          if (topChars[charIdx]) topChars[charIdx].classList.add("is-collapse");
-          if (botChars[charIdx]) botChars[charIdx].classList.add("is-collapse");
-        }, collapseAt);
-      });
+          loader.classList.add("is-opening");
+        }, tOpen);
 
-      setTimeout(function () {
-        if (bar) bar.classList.add("is-sweep");
-      }, tSweep);
+        setTimeout(function () {
+          document.body.classList.remove("is-loading");
+          try { sessionStorage.setItem(SESSION_KEY, "1"); } catch (e) {}
+          if (loader.parentNode) loader.parentNode.removeChild(loader);
+          fireLoaderDone();
+        }, tReveal);
+      }
 
-      setTimeout(function () {
-        loader.classList.add("is-opening");
-      }, tOpen);
-
-      setTimeout(function () {
-        document.body.classList.remove("is-loading");
-        try { sessionStorage.setItem(SESSION_KEY, "1"); } catch (e) {}
-        if (loader.parentNode) loader.parentNode.removeChild(loader);
-        fireLoaderDone();
-      }, tReveal);
+      // Wait for Mulish 800 to actually be ready so the wordmark doesn't
+      // render in a fallback font and "zoom" when the real font swaps in.
+      // 1s ceiling so a slow font fetch never blocks the page.
+      var started = false;
+      function go() { if (!started) { started = true; startSequence(); } }
+      if (document.fonts && document.fonts.load) {
+        document.fonts.load("800 1em Mulish").then(go, go);
+      }
+      setTimeout(go, 1000);
     }
   } else {
     fireLoaderDone();
