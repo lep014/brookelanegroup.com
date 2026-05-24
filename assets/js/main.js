@@ -40,13 +40,13 @@
         if (!c.hasAttribute("data-keep")) nonKeep.push(i);
       });
 
-      var HOLD          = 800;   // static "Brooke Lane" on screen
-      var STAGGER       = 75;    // gap between consecutive letter drops
-      var COLLAPSE_GAP  = 240;   // delay between a letter dropping and its width collapsing
-      var COLLAPSE_DUR  = 520;
-      var BL_HOLD       = 460;
-      var SWEEP         = 700;
-      var OPEN          = 750;
+      var HOLD          = 1100;  // static "Brooke Lane" on screen
+      var STAGGER       = 120;   // gap between consecutive letter drops
+      var COLLAPSE_GAP  = 360;   // delay between a letter dropping and its width collapsing
+      var COLLAPSE_DUR  = 620;
+      var BL_HOLD       = 520;
+      var SWEEP         = 750;
+      var OPEN          = 800;
 
       function startSequence() {
         loader.classList.add("is-ready");
