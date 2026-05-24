@@ -98,7 +98,7 @@
       var started = false;
       function go() { if (!started) { started = true; startSequence(); } }
       if (document.fonts && document.fonts.load) {
-        document.fonts.load("400 1em 'Archivo Black'").then(go, go);
+        document.fonts.load("900 1em Outfit").then(go, go);
       }
       setTimeout(go, 1000);
     }
