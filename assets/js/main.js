@@ -19,13 +19,14 @@
   }
 
   if (loader) {
-    var SESSION_KEY = "blg_loader_shown";
+    var SESSION_KEY = "blg_loader_shown_v2";
+    var forceLoader = /[?&]loader=force\b/.test(window.location.search);
     var shownAlready = false;
     try { shownAlready = sessionStorage.getItem(SESSION_KEY) === "1"; } catch (e) {}
     var reducedMotion = window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (shownAlready || reducedMotion) {
+    if (!forceLoader && (shownAlready || reducedMotion)) {
       loader.parentNode.removeChild(loader);
       fireLoaderDone();
     } else {
