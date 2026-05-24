@@ -544,32 +544,37 @@ p { font-size: var(--fs-body); }
 .legal a { color: var(--teal); text-decoration: underline; }
 
 /* ============================================================
-   Page Loader — "BROOKE LANE" collapses to "BL"
+   Page Loader — "Brooke Lane" collapses to "BL", then a navy
+   line sweeps across and opens to reveal the home page.
    ============================================================ */
 .loader {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: var(--navy-dark);
+  background: var(--teal);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  transition: opacity .6s ease, visibility .6s ease;
+  transition: opacity .5s ease, visibility .5s ease;
 }
 .loader.is-hidden { opacity: 0; visibility: hidden; }
 body.is-loading { overflow: hidden; }
 .loader__text {
-  font-family: var(--serif);
-  font-weight: 400;
-  color: var(--teal);
+  position: relative;
+  z-index: 1;
+  font-family: var(--sans);
+  font-weight: 800;
+  color: var(--white);
   font-size: clamp(2.75rem, 10vw, 7rem);
   line-height: 1;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.005em;
   display: flex;
   align-items: baseline;
   white-space: nowrap;
+  transition: opacity .35s ease;
 }
+.loader__text.is-fading { opacity: 0; }
 .loader__char {
   display: inline-block;
   opacity: 0;
@@ -596,6 +601,22 @@ body.is-loading { overflow: hidden; }
     opacity .35s ease,
     transform .55s cubic-bezier(.2,.7,.2,1);
 }
+.loader__bar {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--navy-dark);
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 2;
+  transition:
+    width .7s cubic-bezier(.65,0,.35,1),
+    height .65s cubic-bezier(.85,0,.15,1);
+}
+.loader__bar.is-sweep { width: 100vw; }
+.loader__bar.is-sweep.is-open { height: 110vh; }
 @media (prefers-reduced-motion: reduce) {
   .loader { transition: none; }
   .loader__char {
@@ -603,6 +624,7 @@ body.is-loading { overflow: hidden; }
     opacity: 1;
     transform: none;
   }
+  .loader__bar { transition: none; }
 }
 
 /* ============================================================

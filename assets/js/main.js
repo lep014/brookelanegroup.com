@@ -4,8 +4,20 @@
 (function () {
   "use strict";
 
-  /* ---------- Page Loader — "BROOKE LANE" → "BL" ---------- */
+  /* ---------- Page Loader — "Brooke Lane" → "BL" → navy wipe ---------- */
   var loader = document.getElementById("loader");
+  var loaderDone = false;
+  var loaderDoneCallbacks = [];
+  function onLoaderDone(cb) {
+    if (loaderDone) cb();
+    else loaderDoneCallbacks.push(cb);
+  }
+  function fireLoaderDone() {
+    loaderDone = true;
+    loaderDoneCallbacks.forEach(function (cb) { cb(); });
+    loaderDoneCallbacks.length = 0;
+  }
+
   if (loader) {
     var SESSION_KEY = "blg_loader_shown";
     var shownAlready = false;
@@ -15,15 +27,28 @@
 
     if (shownAlready || reducedMotion) {
       loader.parentNode.removeChild(loader);
+      fireLoaderDone();
     } else {
       document.body.classList.add("is-loading");
       var chars = loader.querySelectorAll(".loader__char");
-      var STAGGER = 55;
-      var INTRO_DELAY = 180;
-      var HOLD = 700;
-      var COLLAPSE_GAP = 280;
-      var FADE_AFTER = 760;
-      var typeDone = INTRO_DELAY + chars.length * STAGGER + 450;
+      var text = document.getElementById("loader-text");
+      var bar  = document.getElementById("loader-bar");
+
+      var INTRO_DELAY  = 150;
+      var STAGGER      = 50;
+      var HOLD         = 600;   // pause after full word
+      var COLLAPSE_GAP = 260;   // delay between fade-out and width collapse
+      var BL_HOLD      = 380;   // pause on "BL"
+      var SWEEP        = 700;   // bar grows L→R
+      var OPEN         = 650;   // bar expands top/bottom to fill
+      var typeDone     = INTRO_DELAY + chars.length * STAGGER + 420;
+
+      var tCollapse = typeDone + HOLD;
+      var tShrink   = tCollapse + COLLAPSE_GAP;
+      var tBlSettled = tShrink + 550;
+      var tSweep    = tBlSettled + BL_HOLD;
+      var tOpen     = tSweep + SWEEP;
+      var tReveal   = tOpen + OPEN;
 
       chars.forEach(function (c, i) {
         setTimeout(function () { c.classList.add("is-in"); },
@@ -34,24 +59,32 @@
         chars.forEach(function (c) {
           if (!c.hasAttribute("data-keep")) c.classList.add("is-out");
         });
-      }, typeDone + HOLD);
+      }, tCollapse);
 
       setTimeout(function () {
         chars.forEach(function (c) {
           if (!c.hasAttribute("data-keep")) c.classList.add("is-collapse");
         });
-      }, typeDone + HOLD + COLLAPSE_GAP);
+      }, tShrink);
 
       setTimeout(function () {
-        loader.classList.add("is-hidden");
+        if (text) text.classList.add("is-fading");
+        if (bar)  bar.classList.add("is-sweep");
+      }, tSweep);
+
+      setTimeout(function () {
+        if (bar) bar.classList.add("is-open");
+      }, tOpen);
+
+      setTimeout(function () {
         document.body.classList.remove("is-loading");
         try { sessionStorage.setItem(SESSION_KEY, "1"); } catch (e) {}
-      }, typeDone + HOLD + COLLAPSE_GAP + FADE_AFTER);
-
-      setTimeout(function () {
         if (loader.parentNode) loader.parentNode.removeChild(loader);
-      }, typeDone + HOLD + COLLAPSE_GAP + FADE_AFTER + 700);
+        fireLoaderDone();
+      }, tReveal);
     }
+  } else {
+    fireLoaderDone();
   }
 
   /* ---------- Mobile navigation ---------- */
@@ -122,7 +155,7 @@
       }, DELETE_SPEED);
     }
 
-    type(phrases[index]);
+    onLoaderDone(function () { type(phrases[index]); });
   }
 
   /* ---------- Reveal on scroll ---------- */
