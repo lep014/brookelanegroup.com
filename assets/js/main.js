@@ -92,13 +92,13 @@
         }, tReveal);
       }
 
-      // Wait for Mulish 800 to actually be ready so the wordmark doesn't
-      // render in a fallback font and "zoom" when the real font swaps in.
-      // 1s ceiling so a slow font fetch never blocks the page.
+      // Wait for the loader font to actually be ready so the wordmark
+      // doesn't render in a fallback font and "zoom" when the real
+      // font swaps in. 1s ceiling so a slow font fetch never blocks.
       var started = false;
       function go() { if (!started) { started = true; startSequence(); } }
       if (document.fonts && document.fonts.load) {
-        document.fonts.load("800 1em Mulish").then(go, go);
+        document.fonts.load("400 1em 'Archivo Black'").then(go, go);
       }
       setTimeout(go, 1000);
     }

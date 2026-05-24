@@ -578,8 +578,8 @@ body.is-loading { overflow: hidden; }
 .loader__text {
   position: absolute;
   left: 50%;
-  font-family: var(--sans);
-  font-weight: 800;
+  font-family: "Archivo Black", var(--sans);
+  font-weight: 400;
   color: var(--white);
   font-size: clamp(2.75rem, 10vw, 7rem);
   line-height: 1;
@@ -602,7 +602,9 @@ body.is-loading { overflow: hidden; }
 .loader__mark {
   position: absolute;
   left: 50%;
-  width: clamp(7rem, 14vw, 10rem);
+  /* Match the BL wordmark visual size: monogram aspect is ~2.44:1
+     so this width keeps its height equal to the wordmark's font-size. */
+  width: clamp(6.5rem, 24vw, 17rem);
   height: auto;
   opacity: 0;
   pointer-events: none;
