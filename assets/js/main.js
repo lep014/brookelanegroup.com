@@ -44,7 +44,7 @@
       var STAGGER       = 120;   // gap between consecutive letter drops
       var COLLAPSE_GAP  = 360;   // delay between a letter dropping and its width collapsing
       var COLLAPSE_DUR  = 620;
-      var BL_HOLD       = 520;
+      var BL_HOLD       = 850;
       var SWEEP         = 750;
       var OPEN          = 800;
 
@@ -52,12 +52,13 @@
         loader.classList.add("is-ready");
 
         var tOut       = HOLD;
-        var tReveal    = tOut
-                       + (nonKeep.length - 1) * STAGGER
-                       + COLLAPSE_GAP + COLLAPSE_DUR
-                       + BL_HOLD + SWEEP + OPEN;
-        var tSweep     = tReveal - OPEN - SWEEP;
-        var tOpen      = tReveal - OPEN;
+        var tBl        = tOut + (nonKeep.length - 1) * STAGGER
+                              + COLLAPSE_GAP + COLLAPSE_DUR;
+        var tMonogram  = tBl + 120;
+        var tSweep     = tBl + BL_HOLD;
+        var tOpen      = tSweep + SWEEP;
+        var tReveal    = tOpen + OPEN;
+        var texts      = loader.querySelectorAll(".loader__text");
 
         nonKeep.forEach(function (charIdx, seq) {
           var dropAt     = tOut + seq * STAGGER;
@@ -71,6 +72,10 @@
             if (botChars[charIdx]) botChars[charIdx].classList.add("is-collapse");
           }, collapseAt);
         });
+
+        setTimeout(function () {
+          texts.forEach(function (t) { t.classList.add("is-monogram"); });
+        }, tMonogram);
 
         setTimeout(function () {
           if (bar) bar.classList.add("is-sweep");
