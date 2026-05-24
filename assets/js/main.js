@@ -4,7 +4,7 @@
 (function () {
   "use strict";
 
-  /* ---------- Page Loader — "Brooke Lane" → "BL" → navy wipe ---------- */
+  /* ---------- Page Loader — short brand flash ---------- */
   var loader = document.getElementById("loader");
   var loaderDone = false;
   var loaderDoneCallbacks = [];
@@ -19,7 +19,7 @@
   }
 
   if (loader) {
-    var SESSION_KEY = "blg_loader_shown_v2";
+    var SESSION_KEY = "blg_loader_shown_v3";
     var forceLoader = /[?&]loader=force\b/.test(window.location.search);
     var shownAlready = false;
     try { shownAlready = sessionStorage.getItem(SESSION_KEY) === "1"; } catch (e) {}
@@ -27,80 +27,34 @@
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (!forceLoader && (shownAlready || reducedMotion)) {
-      loader.parentNode.removeChild(loader);
+      if (loader.parentNode) loader.parentNode.removeChild(loader);
       document.body.classList.remove("is-loading");
       fireLoaderDone();
     } else {
-      var topChars = loader.querySelectorAll(".loader__half--top .loader__char");
-      var botChars = loader.querySelectorAll(".loader__half--bot .loader__char");
-      var bar  = document.getElementById("loader-bar");
+      var HOLD = 600;   // monogram visible
+      var LIFT = 600;   // panel slide-up duration
+      var img  = loader.querySelector(".loader__mark");
 
-      var nonKeep = [];
-      topChars.forEach(function (c, i) {
-        if (!c.hasAttribute("data-keep")) nonKeep.push(i);
-      });
-
-      var HOLD          = 1100;  // static "Brooke Lane" on screen
-      var STAGGER       = 120;   // gap between consecutive letter drops
-      var COLLAPSE_GAP  = 360;   // delay between a letter dropping and its width collapsing
-      var COLLAPSE_DUR  = 620;
-      var BL_HOLD       = 850;
-      var SWEEP         = 750;
-      var OPEN          = 800;
-
-      function startSequence() {
-        loader.classList.add("is-ready");
-
-        var tOut       = HOLD;
-        var tBl        = tOut + (nonKeep.length - 1) * STAGGER
-                              + COLLAPSE_GAP + COLLAPSE_DUR;
-        var tMonogram  = tBl + 160;
-        var tSweep     = tBl + BL_HOLD;
-        var tOpen      = tSweep + SWEEP;
-        var tReveal    = tOpen + OPEN;
-
-        nonKeep.forEach(function (charIdx, seq) {
-          var dropAt     = tOut + seq * STAGGER;
-          var collapseAt = dropAt + COLLAPSE_GAP;
-          setTimeout(function () {
-            if (topChars[charIdx]) topChars[charIdx].classList.add("is-out");
-            if (botChars[charIdx]) botChars[charIdx].classList.add("is-out");
-          }, dropAt);
-          setTimeout(function () {
-            if (topChars[charIdx]) topChars[charIdx].classList.add("is-collapse");
-            if (botChars[charIdx]) botChars[charIdx].classList.add("is-collapse");
-          }, collapseAt);
-        });
-
+      function start() {
+        loader.classList.add("is-show");
         setTimeout(function () {
-          loader.classList.add("is-monogram");
-        }, tMonogram);
-
-        setTimeout(function () {
-          if (bar) bar.classList.add("is-sweep");
-        }, tSweep);
-
-        setTimeout(function () {
-          loader.classList.add("is-opening");
-        }, tOpen);
-
+          loader.classList.add("is-lift");
+        }, HOLD);
         setTimeout(function () {
           document.body.classList.remove("is-loading");
           try { sessionStorage.setItem(SESSION_KEY, "1"); } catch (e) {}
           if (loader.parentNode) loader.parentNode.removeChild(loader);
           fireLoaderDone();
-        }, tReveal);
+        }, HOLD + LIFT);
       }
 
-      // Wait for the loader font to actually be ready so the wordmark
-      // doesn't render in a fallback font and "zoom" when the real
-      // font swaps in. 1s ceiling so a slow font fetch never blocks.
-      var started = false;
-      function go() { if (!started) { started = true; startSequence(); } }
-      if (document.fonts && document.fonts.load) {
-        document.fonts.load("900 1em Outfit").then(go, go);
+      if (img && !img.complete) {
+        img.addEventListener("load",  start, { once: true });
+        img.addEventListener("error", start, { once: true });
+        setTimeout(start, 400);
+      } else {
+        start();
       }
-      setTimeout(go, 1000);
     }
   } else {
     fireLoaderDone();
