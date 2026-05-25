@@ -626,7 +626,7 @@ body.is-loading { overflow: hidden; }
    value photos in a zig-zag, smaller headings, tighter padding. */
 @media (max-width: 560px) {
   :root {
-    --section-y: 56px;
+    --section-y: 40px;
   }
   .container { padding: 0 20px; }
   .nav__inner { padding: 0 20px; }
@@ -634,34 +634,48 @@ body.is-loading { overflow: hidden; }
   .form-card { padding: 32px 24px; }
 
   /* Heading + body scale-down for phones */
-  .heading--xl { font-size: clamp(1.6rem, 7.5vw, 2.2rem); }
-  .heading--lg { font-size: clamp(1.5rem, 7vw, 2rem); }
-  .heading--md { font-size: clamp(1.35rem, 6.4vw, 1.8rem); }
-  .hero__line { font-size: clamp(1.9rem, 9vw, 2.6rem); }
-  .lead { font-size: 1rem; }
-  p { font-size: .95rem; }
-  .eyebrow { font-size: .75rem; letter-spacing: .14em; }
+  .heading--xl { font-size: clamp(1.5rem, 7vw, 2rem); }
+  .heading--lg { font-size: clamp(1.4rem, 6.6vw, 1.85rem); }
+  .heading--md { font-size: clamp(1.25rem, 6vw, 1.65rem); }
+  .hero__line { font-size: clamp(1.7rem, 8vw, 2.3rem); }
+  .lead { font-size: .95rem; }
+  p { font-size: .92rem; }
+  .eyebrow { font-size: .72rem; letter-spacing: .14em; }
 
   /* Section padding (override the big clamp from .section) */
   .section { padding: var(--section-y) 0; }
 
+  /* Nav — smaller brand mark on phones to match Wix */
+  .brand__mark { width: 30px; height: 30px; }
+  .brand__name { font-size: 1.05rem; line-height: 1.05; }
+
   /* Hero: don't fill the screen on phones */
-  .hero { min-height: 520px; }
-  .hero__sub { font-size: 1rem; margin-top: 14px; }
+  .hero { min-height: 440px; }
+  .hero__sub { font-size: .95rem; margin-top: 12px; }
 
   /* Role cards: keep 2-col on phones (Wix does this) — icon on top,
      heading below, body below. */
-  .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-  .role-card { padding: 22px 18px; }
+  .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .role-card { padding: 20px 16px; }
   .role-card__top {
     flex-direction: column-reverse;
     align-items: flex-start;
-    gap: 14px;
-    margin-bottom: 12px;
+    gap: 12px;
+    margin-bottom: 10px;
   }
-  .role-card h3 { font-size: 1.05rem; }
-  .role-card p { font-size: .85rem; line-height: 1.45; }
+  .role-card h3 { font-size: 1rem; }
+  .role-card p { font-size: .82rem; line-height: 1.45; }
   .role-card__icon { width: 28px; height: 28px; }
+
+  /* Audience — hide the 01/02/03/04 numbers on phones (Wix doesn't
+     show them at this width). Collapse grid to one column. */
+  .audience-list li {
+    grid-template-columns: 1fr;
+    padding: 16px 0;
+  }
+  .audience-list__num { display: none; }
+  .audience-list__label { grid-column: 1; }
+  .audience-list__desc { grid-column: 1; margin-top: 4px; }
 
   /* Values: 2-col with photos interleaved in Wix's mobile zig-zag.
      HTML order is 01, ph1, 02, 03, ph2, 04, 05, ph3 — reorder
@@ -672,7 +686,7 @@ body.is-loading { overflow: hidden; }
        ph 05    */
   .values-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
+    gap: 12px;
   }
   .values-grid > *:nth-child(1) { order: 1; }   /* 01 */
   .values-grid > *:nth-child(3) { order: 2; }   /* 02 */
@@ -684,23 +698,23 @@ body.is-loading { overflow: hidden; }
   .values-grid > *:nth-child(7) { order: 8; }   /* 05 */
 
   .value-card, .value-photo { min-height: 0; }
-  .value-card { padding: 22px 16px; }
-  .value-card__num { font-size: .8rem; }
-  .value-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
-  .value-card p { font-size: .85rem; line-height: 1.45; }
+  .value-card { padding: 18px 14px; }
+  .value-card__num { font-size: .75rem; }
+  .value-card h3 { font-size: 1rem; margin-bottom: 6px; }
+  .value-card p { font-size: .82rem; line-height: 1.45; }
   .value-photo { aspect-ratio: 1 / 1; }
   .value-photo img { width: 100%; height: 100%; object-fit: cover; }
 
   /* Audience: image stacks above text (Wix mobile order) */
-  .audience__media img { height: 220px; }
+  .audience__media img { height: 200px; }
 
   /* Momentum: simplify card overlap on phones */
-  .momentum__image img { height: 220px; }
-  .momentum__card { margin: -40px 12px 0; padding: 26px 22px; }
+  .momentum__image img { height: 200px; }
+  .momentum__card { margin: 14px 0 0; padding: 0; background: transparent; box-shadow: none; }
 
   /* Testimonial */
-  .testimonial { padding: 36px 22px; }
+  .testimonial { padding: 32px 20px; }
 
   /* CTA panel */
-  .cta-panel { padding: 40px 24px; }
+  .cta-panel { padding: 36px 22px; }
 }
