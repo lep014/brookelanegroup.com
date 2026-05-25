@@ -350,7 +350,7 @@ p { font-size: var(--fs-body); }
   gap: 4px 16px;
   padding: 18px 0;
 }
-.audience-list li:first-child { padding-top: 20px; }
+.audience-list li:first-child { padding-top: 36px; }
 .audience-list__num {
   grid-row: 1 / span 2;
   align-self: start;
