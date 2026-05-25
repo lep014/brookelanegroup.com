@@ -205,37 +205,40 @@ p { font-size: var(--fs-body); }
 }
 .hero__inner { max-width: 960px; }
 
-/* Scroll indicator at the bottom of the hero. Mouse-shaped icon
-   with a gentle bounce, signaling there's more below the fold. */
+/* Scroll indicator — "Scroll" label above a thin vertical line that
+   pulses (scaleY + opacity), matching the Angel Custom Homes pattern. */
 .hero__scroll {
   position: absolute;
-  bottom: 28px;
+  bottom: 2.2rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  color: rgba(255,255,255,.78);
+  gap: 0.7rem;
+  color: rgba(255,255,255,.85);
   text-decoration: none;
   font-family: var(--sans);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: .22em;
+  font-size: 0.625rem;
+  font-weight: 300;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
   transition: color .2s ease;
 }
 .hero__scroll:hover { color: var(--white); }
-.hero__scroll-icon {
+.hero__scroll-line {
   display: block;
-  animation: heroScrollBounce 2s ease-in-out infinite;
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(currentColor, transparent);
+  animation: scrollPulse 2.2s ease-in-out infinite;
 }
-@keyframes heroScrollBounce {
-  0%, 20%, 100% { transform: translateY(0); opacity: 1; }
-  50%          { transform: translateY(6px); opacity: .55; }
+@keyframes scrollPulse {
+  0%, 100% { transform: scaleY(0.4); transform-origin: center top; opacity: 0.4; }
+  50%      { transform: scaleY(1);   transform-origin: center top; opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero__scroll-icon { animation: none; }
+  .hero__scroll-line { animation: none; }
 }
 .hero__line {
   font-family: var(--serif);
@@ -708,8 +711,8 @@ body.is-loading { overflow: hidden; }
   /* Hero — full viewport on phones */
   .hero { padding: calc(var(--nav-h) + 24px) 20px 96px; }
   .hero__sub { margin-top: 12px; }
-  .hero__scroll { bottom: 22px; font-size: 9px; gap: 6px; }
-  .hero__scroll-icon { width: 20px; height: 30px; }
+  .hero__scroll { bottom: 1.6rem; gap: 0.55rem; }
+  .hero__scroll-line { height: 38px; }
 
   /* Role cards: keep 2-col on phones (Wix does this) — icon on top,
      heading below, body below. */
