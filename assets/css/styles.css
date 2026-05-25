@@ -3,23 +3,27 @@
    ============================================================ */
 
 /* ------------------------------------------------------------
-   TYPE SYSTEM  (audit reference)
+   TYPE SYSTEM
    ------------------------------------------------------------
-   One scale, used everywhere. Sizes are fluid (clamp) but the
-   ranges never overlap, so hierarchy always holds.
+   Approved scale — applied uniformly across the site.
+   Sizes are fluid clamp() values that interpolate between the
+   phone size (≤560px) and desktop size (≥1025px).
 
-   Display   34 → 56   hero headline            (serif)
-   H1        32 → 48   page titles              (serif)
-   H2        28 → 38   section titles           (serif)
-   Statement 24 → 34   feature sentences / CTA  (serif)
-   H3        22 → 26   card & sub-section titles(serif)
-   Quote     20 → 26   pull quote               (serif)
-   Hero-sub  22 → 30   hero second line         (serif)
-   Lead      17 → 19   intro paragraphs         (sans)
-   Body      17        default paragraphs       (sans)
-   Body-sm   15        card copy, captions      (sans)
-   Eyebrow   13        all uppercase labels     (sans)
-   Nav       12        nav links                (sans)
+   Element                    Phone    Desktop   Font     Weight  LH
+   ---------------------------------------------------------------------
+   Eyebrow / kicker           12px     13px      Mulish   700     1.0
+   Hero H1 (display)          36px     64px      Caslon   400     1.10
+   Page heading-xl            32px     56px      Caslon   400     1.10
+   Section heading-lg         30px     44px      Caslon   400     1.15
+   Subsection heading-md      26px     32px      Caslon   400     1.20
+   Dek / subtitle (.lead)     18px     20px      Mulish   400     1.55
+   Body paragraph             16px     18px      Mulish   400     1.62
+   Body small (card text)     14px     16px      Mulish   400     1.50
+   Card heading h3            18px     22px      Caslon   400     1.25
+   Caption / fine print       12px     13px      Mulish   400     1.40
+   Button label               15px     16px      Mulish   600     1.0
+   Footer label (h4)          12px     13px      Mulish   700     1.0
+   Footer body / address      14px     15px      Mulish   400     1.55
    ------------------------------------------------------------ */
 
 /* ---------- Design tokens ---------- */
@@ -28,9 +32,10 @@
   --navy:      #123458;   /* serif headings */
   --teal:      #006A67;   /* primary accent */
   --teal-cta:  #2E6E6B;   /* call-to-action panel */
-  --ink:       #242323;   /* darkest text */
-  --body:      #54565B;   /* body copy */
-  --muted:     #7A7C82;   /* secondary text */
+  --ink:       #091A2E;   /* darkest text — titles */
+  --body:      #525C6C;   /* body copy */
+  --dek:       #3F4A5A;   /* subtitle / dek */
+  --muted:     #7A8290;   /* caption / fine print */
   --line:      #E4E4E8;   /* hairline borders */
   --off-white: #FAFAFA;   /* alternating section background */
   --white:     #FFFFFF;
@@ -38,27 +43,33 @@
   --serif: "Libre Caslon Text", "Adobe Caslon Pro", Caslon, Georgia, serif;
   --sans:  "Mulish", "Helvetica Neue", Arial, sans-serif;
 
-  /* Type scale */
-  --fs-display:   clamp(2.125rem, 1.35rem + 3.1vw, 3.5rem);  /* 34 → 56 */
-  --fs-h1:        clamp(2rem,     1.55rem + 1.9vw, 3rem);    /* 32 → 48 */
-  --fs-h2:        clamp(1.75rem,  1.42rem + 1.4vw, 2.375rem);/* 28 → 38 */
-  --fs-statement: clamp(1.5rem,   1.14rem + 1.4vw, 2.125rem);/* 24 → 34 */
-  --fs-h3:        clamp(1.375rem, 1.27rem + 0.45vw, 1.625rem);/* 22 → 26 */
-  --fs-quote:     clamp(1.25rem,  1.05rem + 0.8vw, 1.625rem);/* 20 → 26 */
-  --fs-hero-sub:  clamp(1.375rem, 1.12rem + 1vw, 1.875rem);  /* 22 → 30 */
-  --fs-lead:      clamp(1.0625rem,1rem + 0.3vw, 1.1875rem);  /* 17 → 19 */
-  --fs-body:      1.0625rem;  /* 17 */
-  --fs-body-sm:   0.9375rem;  /* 15 */
-  --fs-eyebrow:   0.8125rem;  /* 13 */
-  --fs-nav:       0.75rem;    /* 12 */
+  /* Type scale — phone → desktop via fluid clamp().
+     Each clamp interpolates from the phone size at 360px viewport
+     up to the desktop size at 1280px viewport. */
+  --fs-display:       clamp(2.25rem,  0.674rem + 7.0vw,  4rem);     /* 36 → 64 */
+  --fs-h1:            clamp(2rem,     0.5rem   + 6.667vw, 3.5rem);  /* 32 → 56 */
+  --fs-h2:            clamp(1.875rem, 0.95rem  + 4.111vw, 2.75rem); /* 30 → 44 */
+  --fs-h3:            clamp(1.625rem, 1.328rem + 1.333vw, 2rem);    /* 26 → 32 */
+  --fs-card-h3:       clamp(1.125rem, 0.870rem + 1.111vw, 1.375rem);/* 18 → 22 */
+  --fs-lead:          clamp(1.125rem, 1.066rem + 0.278vw, 1.25rem); /* 18 → 20 */
+  --fs-body:          clamp(1rem,     0.871rem + 0.556vw, 1.125rem);/* 16 → 18 */
+  --fs-body-sm:       clamp(0.875rem, 0.745rem + 0.556vw, 1rem);    /* 14 → 16 */
+  --fs-eyebrow:       clamp(0.75rem,  0.717rem + 0.139vw, 0.8125rem);/* 12 → 13 */
+  --fs-caption:       clamp(0.75rem,  0.717rem + 0.139vw, 0.8125rem);/* 12 → 13 */
+  --fs-btn:           clamp(0.9375rem, 0.880rem + 0.278vw, 1rem);   /* 15 → 16 */
+  --fs-footer-label:  clamp(0.75rem,  0.717rem + 0.139vw, 0.8125rem);/* 12 → 13 */
+  --fs-footer-body:   clamp(0.875rem, 0.846rem + 0.139vw, 0.9375rem);/* 14 → 15 */
+  --fs-nav:           0.8125rem;  /* 13 — nav links */
 
   /* Line heights */
-  --lh-display: 1.15;
-  --lh-heading: 1.25;
-  --lh-snug:    1.42;
-  --lh-body:    1.7;
+  --lh-display: 1.10;   /* hero + page xl */
+  --lh-heading: 1.15;   /* section title lg */
+  --lh-snug:    1.20;   /* heading-md / card h3 */
+  --lh-lead:    1.55;   /* dek */
+  --lh-body:    1.62;   /* body paragraphs */
+  --lh-tight:   1.40;   /* captions */
 
-  --ls-label: 0.15em;
+  --ls-label: 0.14em;
 
   --container: 1200px;
   --nav-h: 76px;
@@ -100,27 +111,26 @@ p { font-size: var(--fs-body); }
 .heading {
   font-family: var(--serif);
   font-weight: 400;
-  color: var(--navy);
-  line-height: var(--lh-heading);
+  color: var(--ink);
   letter-spacing: 0.005em;
 }
-.heading--xl,
-.heading--lg { font-size: var(--fs-h2); }     /* section titles */
-.heading--md { font-size: var(--fs-h3); }      /* card / sub-section titles */
+.heading--xl { font-size: var(--fs-h1); line-height: var(--lh-display); }  /* page titles */
+.heading--lg { font-size: var(--fs-h2); line-height: var(--lh-heading); }  /* section titles */
+.heading--md { font-size: var(--fs-h3); line-height: var(--lh-snug); }     /* card / sub-section titles */
 .text-teal { color: var(--teal); }
 
 .lead {
   font-size: var(--fs-lead);
-  color: var(--body);
-  line-height: 1.62;
+  color: var(--dek);
+  line-height: var(--lh-lead);
 }
 
 /* ---------- Buttons ---------- */
 .btn {
   display: inline-block;
   font-family: var(--sans);
-  font-weight: 700;
-  font-size: 0.875rem;       /* 14 — UI control */
+  font-weight: 600;
+  font-size: var(--fs-btn);  /* 15 → 16 */
   letter-spacing: 0.04em;
   padding: 13px 28px;
   border-radius: 999px;
@@ -243,7 +253,7 @@ p { font-size: var(--fs-body); }
   font-weight: 400;
   font-style: normal;          /* upright — no cursive */
   color: rgba(255,255,255,.80);
-  font-size: var(--fs-hero-sub);
+  font-size: clamp(1.125rem, 0.95rem + 0.8vw, 1.5rem); /* 18 → 24 */
   line-height: 1.3;
   letter-spacing: 0.02em;
   margin-top: 16px;
@@ -258,7 +268,7 @@ p { font-size: var(--fs-body); }
   font-family: var(--serif);
   font-weight: 400;
   color: var(--navy);
-  font-size: var(--fs-statement);
+  font-size: var(--fs-h3);
   line-height: var(--lh-snug);
 }
 
@@ -309,8 +319,8 @@ p { font-size: var(--fs-body); }
   gap: 16px; margin-bottom: 16px;
 }
 .role-card__top h3 {
-  font-family: var(--serif); font-weight: 400; color: var(--navy);
-  font-size: var(--fs-h3); line-height: var(--lh-heading);
+  font-family: var(--serif); font-weight: 400; color: var(--ink);
+  font-size: var(--fs-card-h3); line-height: var(--lh-snug);
 }
 .role-card__icon { flex: none; color: #C7CAD0; }
 .role-card p { font-size: var(--fs-body-sm); }
@@ -379,8 +389,8 @@ p { font-size: var(--fs-body); }
    below them align across every card. */
 .value-card__body { margin-top: clamp(56px, 9vw, 120px); }
 .value-card__body h3 {
-  font-family: var(--serif); font-weight: 400; color: var(--navy);
-  font-size: var(--fs-h3); line-height: var(--lh-heading);
+  font-family: var(--serif); font-weight: 400; color: var(--ink);
+  font-size: var(--fs-card-h3); line-height: var(--lh-snug);
   min-height: 2.5em; margin-bottom: 10px;
 }
 .value-card__body p { font-size: var(--fs-body-sm); }
@@ -406,7 +416,7 @@ p { font-size: var(--fs-body); }
   font-family: var(--serif);
   font-weight: 400;
   color: var(--navy);
-  font-size: var(--fs-quote);
+  font-size: var(--fs-h3);
   line-height: 1.5;
   margin-bottom: 36px;
 }
@@ -435,7 +445,7 @@ p { font-size: var(--fs-body); }
 }
 .cta-panel h2 {
   font-family: var(--serif); font-weight: 400; color: var(--white);
-  font-size: var(--fs-statement); line-height: var(--lh-heading);
+  font-size: var(--fs-h2); line-height: var(--lh-heading);
   margin-bottom: 16px;
 }
 .cta-panel p {
@@ -455,11 +465,15 @@ p { font-size: var(--fs-body); }
 }
 .footer .brand__name { font-size: 1.375rem; }   /* 22 */
 .footer__col h4 {
-  font-size: var(--fs-eyebrow); font-weight: 800; letter-spacing: var(--ls-label);
+  font-size: var(--fs-footer-label); font-weight: 700; letter-spacing: var(--ls-label);
   text-transform: uppercase; color: rgba(255,255,255,.55);
   margin-bottom: 16px;
 }
-.footer__col p, .footer__col a { font-size: var(--fs-body-sm); color: rgba(255,255,255,.82); }
+.footer__col p, .footer__col a {
+  font-size: var(--fs-footer-body);
+  color: rgba(255,255,255,.82);
+  line-height: var(--lh-lead);
+}
 .footer__col a:hover { color: var(--white); }
 .footer__social { width: 30px; }
 .footer__bottom {
@@ -680,14 +694,9 @@ body.is-loading { overflow: hidden; }
   .footer__top { grid-template-columns: 1fr; gap: 30px; }
   .form-card { padding: 32px 24px; }
 
-  /* Heading + body scale-down for phones */
-  .heading--xl { font-size: clamp(1.5rem, 7vw, 2rem); }
-  .heading--lg { font-size: clamp(1.4rem, 6.6vw, 1.85rem); }
-  .heading--md { font-size: clamp(1.25rem, 6vw, 1.65rem); }
-  .hero__line { font-size: clamp(1.7rem, 8vw, 2.3rem); }
-  .lead { font-size: 1.02rem; line-height: 1.55; color: var(--body); }
-  p { font-size: .92rem; }
-  .eyebrow { font-size: .72rem; letter-spacing: .14em; }
+  /* The site-wide clamp() type scale already produces the phone
+     sizes (16px body, 12px eyebrow, 18px dek, etc.) at this
+     viewport, so no font-size overrides are needed here. */
 
   /* Section padding (override the big clamp from .section) */
   .section { padding: var(--section-y) 0; }
@@ -696,9 +705,9 @@ body.is-loading { overflow: hidden; }
   .brand__mark { width: 30px; height: 30px; }
   .brand__name { font-size: 1.05rem; line-height: 1.05; }
 
-  /* Hero: full viewport on phones, smaller subtitle */
+  /* Hero — full viewport on phones */
   .hero { padding: calc(var(--nav-h) + 24px) 20px 96px; }
-  .hero__sub { font-size: .95rem; margin-top: 12px; }
+  .hero__sub { margin-top: 12px; }
   .hero__scroll { bottom: 22px; font-size: 9px; gap: 6px; }
   .hero__scroll-icon { width: 20px; height: 30px; }
 
@@ -712,8 +721,6 @@ body.is-loading { overflow: hidden; }
     gap: 12px;
     margin-bottom: 10px;
   }
-  .role-card h3 { font-size: 1rem; }
-  .role-card p { font-size: .82rem; line-height: 1.45; }
   .role-card__icon { width: 28px; height: 28px; }
 
   /* Audience — hide the 01/02/03/04 numbers on phones (Wix doesn't
@@ -748,9 +755,7 @@ body.is-loading { overflow: hidden; }
 
   .value-card, .value-photo { min-height: 0; }
   .value-card { padding: 18px 14px; }
-  .value-card__num { font-size: .75rem; }
-  .value-card h3 { font-size: 1rem; margin-bottom: 6px; }
-  .value-card p { font-size: .82rem; line-height: 1.45; }
+  .value-card h3 { margin-bottom: 6px; }
   .value-photo { aspect-ratio: 1 / 1; }
   .value-photo img { width: 100%; height: 100%; object-fit: cover; }
 
