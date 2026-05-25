@@ -284,6 +284,7 @@ p { font-size: var(--fs-body); }
   padding: 48px 44px;
 }
 .momentum__body p { margin-top: 18px; }
+.momentum__dek { margin-top: 16px; }
 
 /* ============================================================
    Our Role (cards grid)
@@ -684,7 +685,7 @@ body.is-loading { overflow: hidden; }
   .heading--lg { font-size: clamp(1.4rem, 6.6vw, 1.85rem); }
   .heading--md { font-size: clamp(1.25rem, 6vw, 1.65rem); }
   .hero__line { font-size: clamp(1.7rem, 8vw, 2.3rem); }
-  .lead { font-size: .95rem; }
+  .lead { font-size: 1.02rem; line-height: 1.55; color: var(--body); }
   p { font-size: .92rem; }
   .eyebrow { font-size: .72rem; letter-spacing: .14em; }
 
