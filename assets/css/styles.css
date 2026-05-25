@@ -183,7 +183,9 @@ p { font-size: var(--fs-body); }
    Hero
    ============================================================ */
 .hero {
+  position: relative;
   min-height: 100vh;
+  min-height: 100svh;
   display: flex; align-items: center; justify-content: center;
   text-align: center;
   padding: calc(var(--nav-h) + 40px) 24px 80px;
@@ -192,6 +194,39 @@ p { font-size: var(--fs-body); }
     url("../img/hero-bridge.jpg") center 38% / cover no-repeat;
 }
 .hero__inner { max-width: 960px; }
+
+/* Scroll indicator at the bottom of the hero. Mouse-shaped icon
+   with a gentle bounce, signaling there's more below the fold. */
+.hero__scroll {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,.78);
+  text-decoration: none;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  transition: color .2s ease;
+}
+.hero__scroll:hover { color: var(--white); }
+.hero__scroll-icon {
+  display: block;
+  animation: heroScrollBounce 2s ease-in-out infinite;
+}
+@keyframes heroScrollBounce {
+  0%, 20%, 100% { transform: translateY(0); opacity: 1; }
+  50%          { transform: translateY(6px); opacity: .55; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__scroll-icon { animation: none; }
+}
 .hero__line {
   font-family: var(--serif);
   font-weight: 400;
@@ -248,7 +283,7 @@ p { font-size: var(--fs-body); }
   box-shadow: 0 30px 60px rgba(18,52,88,.14);
   padding: 48px 44px;
 }
-.momentum__card p { margin-top: 18px; }
+.momentum__body p { margin-top: 18px; }
 
 /* ============================================================
    Our Role (cards grid)
@@ -649,9 +684,11 @@ body.is-loading { overflow: hidden; }
   .brand__mark { width: 30px; height: 30px; }
   .brand__name { font-size: 1.05rem; line-height: 1.05; }
 
-  /* Hero: don't fill the screen on phones */
-  .hero { min-height: 440px; }
+  /* Hero: full viewport on phones, smaller subtitle */
+  .hero { padding: calc(var(--nav-h) + 24px) 20px 96px; }
   .hero__sub { font-size: .95rem; margin-top: 12px; }
+  .hero__scroll { bottom: 22px; font-size: 9px; gap: 6px; }
+  .hero__scroll-icon { width: 20px; height: 30px; }
 
   /* Role cards: keep 2-col on phones (Wix does this) — icon on top,
      heading below, body below. */
@@ -708,9 +745,18 @@ body.is-loading { overflow: hidden; }
   /* Audience: image stacks above text (Wix mobile order) */
   .audience__media img { height: 200px; }
 
-  /* Momentum: simplify card overlap on phones */
-  .momentum__image img { height: 200px; }
-  .momentum__card { margin: 14px 0 0; padding: 0; background: transparent; box-shadow: none; }
+  /* Momentum: editorial order on phones — eyebrow + heading, image,
+     body. Dissolve the desktop card wrapper so its children become
+     siblings of the image, then order them. */
+  .momentum__layout { display: flex; flex-direction: column; }
+  .momentum__card {
+    display: contents;
+  }
+  .momentum__head { order: 1; }
+  .momentum__image { order: 2; margin-top: 14px; }
+  .momentum__image img { height: 220px; }
+  .momentum__body { order: 3; margin-top: 14px; }
+  .momentum__body p { margin-top: 0; }
 
   /* Testimonial */
   .testimonial { padding: 32px 20px; }
