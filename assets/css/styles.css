@@ -336,14 +336,15 @@ p { font-size: var(--fs-body); }
   row-gap: 0;
   align-items: start;
 }
-.audience-list { margin-top: 12px; }
-.audience__intro { margin: 20px 0 14px; }
+.audience-list { margin-top: 0; }
+.audience__intro { margin: 20px 0 0; }
 .audience-list li {
   display: grid;
   grid-template-columns: 48px 1fr;
   gap: 4px 16px;
   padding: 18px 0;
 }
+.audience-list li:first-child { padding-top: 20px; }
 .audience-list__num {
   grid-row: 1 / span 2;
   align-self: start;
@@ -698,6 +699,7 @@ body.is-loading { overflow: hidden; }
   .audience__grid {
     grid-template-columns: 1fr;
     column-gap: 0;
+    row-gap: 0;
   }
   .contact__grid { grid-template-columns: 1fr; gap: 40px; }
   .footer__bottom { justify-content: flex-start; }
