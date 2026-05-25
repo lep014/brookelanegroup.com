@@ -807,5 +807,5 @@ body.is-loading { overflow: hidden; }
   /* CTA section — tighter padding on phone */
   .cta-section { padding: 56px 0; }
   .cta-section__inner { padding: 0 24px; }
-  .cta-section__actions .btn { width: 100%; max-width: 320px; }
+  .cta-section__actions .btn { min-width: 120px; }
 }
