@@ -665,7 +665,28 @@ body.is-loading { overflow: hidden; }
   }
   .nav__menu.open { transform: translateY(0); }
   .nav__link { width: 100%; padding: 14px 0; }
-  .nav__cta { margin: 10px 0 0; }
+  /* "Get In Touch" — strip the button styling inside the open
+     mobile menu so it reads as just another nav link. */
+  .nav__menu .nav__cta {
+    background: transparent;
+    color: rgba(255,255,255,.86);
+    border: none;
+    border-radius: 0;
+    padding: 14px 0;
+    margin: 0;
+    width: 100%;
+    text-align: left;
+    font-family: var(--sans);
+    font-size: var(--fs-nav);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .nav__menu .nav__cta:hover {
+    background: transparent;
+    color: var(--white);
+    transform: none;
+  }
   .nav__toggle { display: block; }
 
   .momentum__image { width: 100%; }
