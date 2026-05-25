@@ -430,8 +430,16 @@ p { font-size: var(--fs-body); }
   width: 80px; height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 22px;
+  margin-bottom: 12px;
   border: 2px solid rgba(255,255,255,.25);
+}
+.cta-section__caption {
+  font-family: var(--sans);
+  font-size: var(--fs-footer-body);
+  font-weight: 600;
+  color: rgba(255,255,255,.92);
+  letter-spacing: 0.02em;
+  margin-bottom: 22px;
 }
 .eyebrow--light { color: rgba(255,255,255,.7); margin-bottom: 14px; }
 .cta-section__title { color: var(--white); margin-bottom: 18px; }
