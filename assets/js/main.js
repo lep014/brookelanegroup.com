@@ -147,6 +147,30 @@
     revealEls.forEach(function (el) { el.classList.add("is-visible"); });
   }
 
+  /* ---------- Contact unmasking ----------
+     Email + phone are stored in data attributes only, never as
+     plain text or hrefs in the served HTML. Spam scrapers that
+     don't execute JS (which is most of them) come away empty.
+     Real users get fully functional mailto: / tel: links and
+     visible addresses / numbers wired up here on page load.       */
+  document.querySelectorAll("[data-em]").forEach(function (el) {
+    var parts = el.getAttribute("data-em").split("|");
+    if (parts.length !== 2) return;
+    var addr = parts[0] + "@" + parts[1];
+    el.setAttribute("href", "mailto:" + addr);
+    if (el.hasAttribute("data-em-show")) el.textContent = addr;
+  });
+  document.querySelectorAll("[data-tel]").forEach(function (el) {
+    // Value is stored reversed so the raw HTML never contains the
+    // actual phone digits in order — defeats regex phone scrapers.
+    var num = el.getAttribute("data-tel").split("").reverse().join("");
+    el.setAttribute("href", "tel:+" + num);
+    if (el.hasAttribute("data-tel-show")) {
+      var local = num.replace(/^1/, "");
+      el.textContent = local.slice(0, 3) + " " + local.slice(3, 6) + " " + local.slice(6);
+    }
+  });
+
   /* ---------- Contact form ----------
      Submits to Formspree without leaving the page and shows an
      inline message. Until a real Formspree ID is added (the action
