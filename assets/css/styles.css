@@ -12,8 +12,8 @@
    Element                    Phone    Desktop  Font     Weight  LH
    ---------------------------------------------------------------------
    Title (.heading,
-     .hero__line, .page-header h1, .cta-panel h2,
-     .legal h2)               22 px    28 px    Caslon   400     1.15
+     .hero__line, .page-header h1, .legal h2)
+                              22 px    28 px    Caslon   400     1.15
    Card heading (role/value
      card h3, audience label) 17 px    20 px    Caslon   400     1.15
    Eyebrow / kicker           12 px    13 px    Mulish   700     1.0
@@ -441,22 +441,52 @@ p { font-size: var(--fs-body); }
 }
 
 /* ============================================================
-   CTA panel
+   CTA section — full-bleed teal closing that flows into the
+   navy footer. Personal sign-off with founder headshot, two
+   contact actions (email + phone).
    ============================================================ */
-.cta-panel {
+.cta-section {
   background: var(--teal-cta);
-  border-radius: 10px;
+  padding: clamp(64px, 9vw, 120px) 0;
   text-align: center;
-  padding: clamp(56px, 8vw, 96px) 24px;
+  color: var(--white);
 }
-.cta-panel h2 {
-  font-family: var(--serif); font-weight: 400; color: var(--white);
-  font-size: var(--fs-title); line-height: var(--lh-heading);
-  margin-bottom: 16px;
+.cta-section__inner {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.cta-panel p {
-  color: rgba(255,255,255,.88);
-  max-width: 520px; margin: 0 auto 30px;
+.cta-section__avatar {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 22px;
+  border: 2px solid rgba(255,255,255,.25);
+}
+.eyebrow--light { color: rgba(255,255,255,.7); margin-bottom: 14px; }
+.cta-section__title { color: var(--white); margin-bottom: 18px; }
+.cta-section__body {
+  color: rgba(255,255,255,.85);
+  line-height: var(--lh-body);
+  margin-bottom: 32px;
+}
+.cta-section__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.btn--outline-light {
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(255,255,255,.55);
+}
+.btn--outline-light:hover {
+  background: var(--white);
+  color: var(--teal-cta);
+  transform: translateY(-2px);
 }
 
 /* ============================================================
@@ -787,6 +817,8 @@ body.is-loading { overflow: hidden; }
   /* Testimonial */
   .testimonial { padding: 32px 20px; }
 
-  /* CTA panel */
-  .cta-panel { padding: 36px 22px; }
+  /* CTA section — tighter padding on phone */
+  .cta-section { padding: 56px 0; }
+  .cta-section__inner { padding: 0 24px; }
+  .cta-section__actions .btn { width: 100%; max-width: 320px; }
 }
