@@ -268,7 +268,7 @@ p { font-size: var(--fs-body); }
 .intro__statement {
   font-family: var(--serif);
   font-weight: 400;
-  color: var(--navy);
+  color: var(--ink);
   font-size: var(--fs-title);
   line-height: var(--lh-snug);
 }
