@@ -152,8 +152,21 @@
      inline message. Until a real Formspree ID is added (the action
      still contains "YOUR_FORM_ID"), it degrades gracefully and
      points visitors to the email address instead.                  */
-  var form = document.querySelector(".form-card");
+  var form = document.querySelector(".contact__form, .form-card");
   var msg = document.getElementById("form-msg");
+
+  // Conditionally show the SMS consent block only after the visitor
+  // types a phone number — it's only relevant if they're opting in.
+  var phoneInput = form && form.querySelector('input[name="phone"]');
+  var smsWrap = document.getElementById("sms-consent-wrap");
+  if (phoneInput && smsWrap) {
+    var toggleSms = function () {
+      var has = phoneInput.value.trim().length > 0;
+      smsWrap.hidden = !has;
+    };
+    phoneInput.addEventListener("input", toggleSms);
+    toggleSms();
+  }
   if (form && msg) {
     function showMsg(kind, html) {
       msg.className = "form-msg form-msg--" + kind;

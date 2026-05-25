@@ -516,30 +516,29 @@ p { font-size: var(--fs-body); }
 /* ============================================================
    Contact
    ============================================================ */
-.contact__grid {
-  display: grid;
-  grid-template-columns: 1fr 1.05fr;
-  gap: 64px;
-  align-items: start;
+.contact { padding-top: clamp(40px, 6vw, 72px); }
+.contact .container { max-width: 620px; }
+.contact__intro { text-align: left; margin-bottom: 36px; }
+.contact__intro p { margin-top: 14px; }
+.contact__form { display: block; }
+.contact__signoff {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  font-size: var(--fs-body-sm);
+  color: var(--body);
+  line-height: 1.55;
 }
-.contact__intro p { margin-top: 20px; }
-.contact__note { margin-top: 18px; font-style: italic; color: var(--muted); }
-.contact__details { margin-top: 36px; display: grid; gap: 22px; }
-.contact__detail h4 {
-  font-size: var(--fs-eyebrow); font-weight: 800; letter-spacing: var(--ls-label);
-  text-transform: uppercase; color: var(--teal); margin-bottom: 5px;
+.contact__signoff-avatar {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: none;
 }
-.contact__detail a { font-size: 1.125rem; color: var(--navy); font-family: var(--serif); }
-.contact__detail a:hover { color: var(--teal); }
-
-.form-card {
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 44px 40px;
-  background: var(--white);
-  box-shadow: 0 24px 50px rgba(18,52,88,.07);
-}
-.form-card > .eyebrow { margin-bottom: 26px; }
+.contact__signoff strong { color: var(--ink); font-weight: 700; }
 .field { margin-bottom: 20px; }
 .field label {
   display: block; font-size: var(--fs-eyebrow); font-weight: 700;
@@ -571,13 +570,14 @@ p { font-size: var(--fs-body); }
   display: grid; grid-template-columns: 20px 1fr; gap: 12px;
   align-items: start;
 }
+.field--check[hidden] { display: none; }
 .field--check input { width: 18px; height: 18px; margin-top: 3px; accent-color: var(--teal); }
 .field--check label {
   font-weight: 400; font-size: var(--fs-eyebrow); letter-spacing: 0;
   text-transform: none; color: var(--muted); line-height: 1.55;
 }
 .field--check a { color: var(--teal); text-decoration: underline; }
-.form-card .btn { width: 100%; margin-top: 6px; padding: 15px; }
+.contact__form .btn { width: 100%; margin-top: 6px; padding: 15px; }
 .form-msg {
   font-size: var(--fs-body-sm);
   line-height: 1.55;
@@ -709,7 +709,6 @@ body.is-loading { overflow: hidden; }
     column-gap: 0;
     row-gap: 0;
   }
-  .contact__grid { grid-template-columns: 1fr; gap: 40px; }
   .footer__bottom { justify-content: flex-start; }
 }
 
@@ -722,7 +721,6 @@ body.is-loading { overflow: hidden; }
   .container { padding: 0 20px; }
   .nav__inner { padding: 0 20px; }
   .footer__top { grid-template-columns: 1fr; gap: 30px; }
-  .form-card { padding: 32px 24px; }
 
   /* The site-wide clamp() type scale already produces the phone
      sizes (16px body, 12px eyebrow, 18px dek, etc.) at this
