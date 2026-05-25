@@ -92,7 +92,7 @@
       "hustle with passion"
     ];
     var TYPE_SPEED = 100;
-    var DELETE_SPEED = 50;
+    var DELETE_SPEED = 90;
     var HOLD = 1400;
     var index = 0;
 

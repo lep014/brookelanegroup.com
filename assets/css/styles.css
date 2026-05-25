@@ -245,7 +245,13 @@ p { font-size: var(--fs-body); }
   font-size: var(--fs-title);
   line-height: var(--lh-display);
   min-height: 1.3em;
+  /* Force a clean GPU layer so iOS Safari fully repaints the
+     typewriter between character changes (avoids sub-pixel
+     ghost dots from incomplete composite refreshes). */
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
 }
+#typed { display: inline-block; }
 .caret { font-weight: 300; }
 .caret.blink { animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
