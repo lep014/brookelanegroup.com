@@ -520,6 +520,18 @@ p { font-size: var(--fs-body); }
 .contact .container { max-width: 620px; }
 .contact__intro { text-align: left; margin-bottom: 36px; }
 .contact__intro p { margin-top: 14px; }
+.contact__direct {
+  margin-top: 16px !important;
+  font-size: var(--fs-body-sm);
+  color: var(--muted);
+}
+.contact__direct a {
+  color: var(--teal);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.contact__direct a:hover { color: var(--ink); }
 .contact__form { display: block; }
 .contact__signoff {
   display: flex;
