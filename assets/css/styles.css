@@ -48,12 +48,13 @@
      iPhone, growing to ~72px on desktop). Each clamp interpolates
      from the phone size at 360px viewport up to the desktop size
      at 1280px viewport. */
-  --fs-display:       clamp(1.75rem,  1.022rem + 3.236vw, 2.5rem);  /* 28 → 40 (matches section title) */
-  --fs-h1:            clamp(1.75rem,  1.022rem + 3.236vw, 2.5rem);  /* 28 → 40 (matches section title) */
-  --fs-h2:            clamp(1.75rem,  1.022rem + 3.236vw, 2.5rem);  /* 28 → 40 */
-  --fs-h3:            clamp(1.375rem, 1.058rem + 1.406vw, 1.75rem); /* 22 → 28 (subsection) */
+  /* All titles + subtitle unified at the heading-md scale (22 → 28). */
+  --fs-display:       clamp(1.375rem, 1.058rem + 1.406vw, 1.75rem); /* 22 → 28 */
+  --fs-h1:            clamp(1.375rem, 1.058rem + 1.406vw, 1.75rem); /* 22 → 28 */
+  --fs-h2:            clamp(1.375rem, 1.058rem + 1.406vw, 1.75rem); /* 22 → 28 */
+  --fs-h3:            clamp(1.375rem, 1.058rem + 1.406vw, 1.75rem); /* 22 → 28 */
   --fs-card-h3:       clamp(1.0625rem, 0.918rem + 0.642vw, 1.25rem);/* 17 → 20 */
-  --fs-lead:          clamp(1.125rem, 1.066rem + 0.278vw, 1.25rem); /* 18 → 20 */
+  --fs-lead:          clamp(1.375rem, 1.058rem + 1.406vw, 1.75rem); /* 22 → 28 */
   --fs-body:          clamp(1rem,     0.871rem + 0.556vw, 1.125rem);/* 16 → 18 */
   --fs-body-sm:       clamp(0.875rem, 0.745rem + 0.556vw, 1rem);    /* 14 → 16 */
   --fs-eyebrow:       clamp(0.75rem,  0.717rem + 0.139vw, 0.8125rem);/* 12 → 13 */
