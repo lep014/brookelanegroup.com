@@ -360,8 +360,13 @@ p { font-size: var(--fs-body); }
   font-size: var(--fs-eyebrow); padding-top: 2px;
 }
 .audience-list__label {
-  font-weight: 800; font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label);
-  text-transform: uppercase; color: var(--navy); align-self: center;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: var(--fs-card-h3);
+  line-height: var(--lh-snug);
+  color: var(--ink);
+  letter-spacing: 0.005em;
+  align-self: center;
 }
 .audience-list__desc { grid-column: 2; color: var(--body); font-size: var(--fs-body-sm); }
 .audience__media { border-radius: var(--radius); overflow: hidden; }
