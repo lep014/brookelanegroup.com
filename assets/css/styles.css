@@ -112,9 +112,9 @@ p { font-size: var(--fs-body); }
 }
 .heading {
   font-family: var(--serif);
-  font-weight: 700;
+  font-weight: 400;
   color: var(--ink);
-  letter-spacing: -0.01em;
+  letter-spacing: 0.005em;
 }
 .heading--xl { font-size: var(--fs-h1); line-height: var(--lh-display); }  /* page titles */
 .heading--lg { font-size: var(--fs-h2); line-height: var(--lh-heading); }  /* section titles */
@@ -244,9 +244,8 @@ p { font-size: var(--fs-body); }
 }
 .hero__line {
   font-family: var(--serif);
-  font-weight: 700;
+  font-weight: 400;
   color: var(--white);
-  letter-spacing: -0.01em;
   font-size: var(--fs-display);
   line-height: var(--lh-display);
   min-height: 1.3em;
@@ -325,7 +324,7 @@ p { font-size: var(--fs-body); }
   gap: 16px; margin-bottom: 16px;
 }
 .role-card__top h3 {
-  font-family: var(--serif); font-weight: 700; color: var(--ink);
+  font-family: var(--serif); font-weight: 400; color: var(--ink);
   font-size: var(--fs-card-h3); line-height: var(--lh-snug);
 }
 .role-card__icon { flex: none; color: #C7CAD0; }
@@ -395,7 +394,7 @@ p { font-size: var(--fs-body); }
    below them align across every card. */
 .value-card__body { margin-top: clamp(56px, 9vw, 120px); }
 .value-card__body h3 {
-  font-family: var(--serif); font-weight: 700; color: var(--ink);
+  font-family: var(--serif); font-weight: 400; color: var(--ink);
   font-size: var(--fs-card-h3); line-height: var(--lh-snug);
   min-height: 2.5em; margin-bottom: 10px;
 }
@@ -450,10 +449,9 @@ p { font-size: var(--fs-body); }
   padding: clamp(56px, 8vw, 96px) 24px;
 }
 .cta-panel h2 {
-  font-family: var(--serif); font-weight: 700; color: var(--white);
+  font-family: var(--serif); font-weight: 400; color: var(--white);
   font-size: var(--fs-h2); line-height: var(--lh-heading);
   margin-bottom: 16px;
-  letter-spacing: -0.01em;
 }
 .cta-panel p {
   color: rgba(255,255,255,.88);
@@ -503,9 +501,8 @@ p { font-size: var(--fs-body); }
   text-align: center;
 }
 .page-header h1 {
-  font-family: var(--serif); font-weight: 700;
+  font-family: var(--serif); font-weight: 400;
   font-size: var(--fs-h1); line-height: var(--lh-display); color: var(--white);
-  letter-spacing: -0.01em;
 }
 .page-header p { color: rgba(255,255,255,.8); font-size: var(--fs-lead); margin-top: 14px; }
 
@@ -595,7 +592,7 @@ p { font-size: var(--fs-body); }
   border-bottom: 1px solid var(--line);
 }
 .legal h2 {
-  font-family: var(--serif); font-weight: 700; color: var(--ink);
+  font-family: var(--serif); font-weight: 400; color: var(--ink);
   font-size: var(--fs-h3); line-height: var(--lh-snug); margin: 40px 0 12px;
 }
 .legal h3 {
