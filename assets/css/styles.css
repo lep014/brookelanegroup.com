@@ -408,39 +408,6 @@ p { font-size: var(--fs-body); }
 .value-photo img { width: 100%; height: 100%; object-fit: cover; }
 
 /* ============================================================
-   Testimonial / partnership note
-   ============================================================ */
-.testimonial__inner { max-width: 980px; margin: 0 auto; }
-.testimonial__mark {
-  font-family: var(--serif);
-  font-size: 130px;
-  line-height: 0.6;
-  color: #D7D8DA;
-  height: 70px;
-}
-.testimonial__quote {
-  font-family: var(--serif);
-  font-weight: 400;
-  color: var(--navy);
-  font-size: var(--fs-title);
-  line-height: 1.5;
-  margin-bottom: 36px;
-}
-.testimonial__person { display: flex; align-items: center; gap: 20px; }
-.testimonial__avatar {
-  width: 84px; height: 84px; border-radius: 50%;
-  object-fit: cover; flex: none;
-}
-.testimonial__name {
-  font-family: var(--serif); font-size: var(--fs-title);
-  color: var(--teal); line-height: 1.2; margin-bottom: 3px;
-}
-.testimonial__role {
-  font-size: var(--fs-eyebrow); font-weight: 700; letter-spacing: var(--ls-label);
-  text-transform: uppercase; color: var(--muted);
-}
-
-/* ============================================================
    CTA section — full-bleed teal closing that flows into the
    navy footer. Personal sign-off with founder headshot, two
    contact actions (email + phone).
@@ -813,9 +780,6 @@ body.is-loading { overflow: hidden; }
   .momentum__image img { height: 220px; }
   .momentum__body { order: 3; margin-top: 14px; }
   .momentum__body p { margin-top: 0; }
-
-  /* Testimonial */
-  .testimonial { padding: 32px 20px; }
 
   /* CTA section — tighter padding on phone */
   .cta-section { padding: 56px 0; }
