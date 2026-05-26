@@ -181,7 +181,10 @@ p { font-size: var(--fs-body); }
 .nav__toggle {
   display: none; background: none; border: 0; cursor: pointer;
   width: 42px; height: 42px; padding: 9px;
+  opacity: 0.72;
+  transition: opacity .15s ease;
 }
+.nav__toggle:hover { opacity: 1; }
 .nav__toggle span {
   display: block; height: 2px; background: var(--white);
   margin: 5px 0; border-radius: 2px; transition: .25s ease;
@@ -424,7 +427,7 @@ p { font-size: var(--fs-body); }
    ============================================================ */
 .cta-section {
   background: linear-gradient(160deg, #2E6E6B 0%, #235855 100%);
-  padding: clamp(56px, 7.5vw, 100px) 0 clamp(72px, 8vw, 110px);
+  padding: clamp(40px, 5.5vw, 76px) 0 clamp(60px, 7vw, 96px);
   color: var(--white);
   position: relative;
 }
@@ -455,6 +458,10 @@ p { font-size: var(--fs-body); }
   object-fit: cover;
   margin-bottom: 18px;
   display: block;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.18) inset,
+    0 18px 36px rgba(0,0,0,.22),
+    0 4px 10px rgba(0,0,0,.18);
 }
 .cta-section__caption {
   font-family: var(--sans);
@@ -467,9 +474,10 @@ p { font-size: var(--fs-body); }
 .cta-section__bio {
   font-size: var(--fs-body-sm);
   line-height: 1.55;
-  color: rgba(255,255,255,.72);
+  color: rgba(255,255,255,.82);
   margin: 0;
   max-width: 320px;
+  text-wrap: balance;
 }
 
 /* Right column — pitch + actions */
@@ -478,12 +486,14 @@ p { font-size: var(--fs-body); }
   color: var(--white);
   margin-bottom: 18px;
   letter-spacing: -0.005em;
+  text-wrap: balance;
 }
 .cta-section__body {
   color: rgba(255,255,255,.85);
   line-height: var(--lh-body);
   margin-bottom: 28px;
   max-width: 480px;
+  text-wrap: pretty;
 }
 
 /* Primary action: Email pill */
