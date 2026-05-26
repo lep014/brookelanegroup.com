@@ -55,10 +55,10 @@
   --fs-body-sm:       clamp(0.875rem, 0.745rem + 0.556vw, 1rem);    /* 14 → 16 */
   --fs-eyebrow:       clamp(0.75rem,  0.717rem + 0.139vw, 0.8125rem);/* 12 → 13 */
   --fs-caption:       clamp(0.75rem,  0.717rem + 0.139vw, 0.8125rem);/* 12 → 13 */
-  --fs-btn:           clamp(0.9375rem, 0.880rem + 0.278vw, 1rem);   /* 15 → 16 */
+  --fs-btn:           clamp(0.8125rem, 0.755rem + 0.278vw, 0.875rem); /* 13 → 14 */
   --fs-footer-label:  clamp(0.75rem,  0.717rem + 0.139vw, 0.8125rem);/* 12 → 13 */
   --fs-footer-body:   clamp(0.875rem, 0.846rem + 0.139vw, 0.9375rem);/* 14 → 15 */
-  --fs-nav:           0.8125rem;  /* 13 — nav links */
+  --fs-nav:           0.6875rem;  /* 11 — nav links (small caps, tracked) */
 
   /* Line heights — tighter on titles to match WSJ density */
   --lh-display: 1.05;   /* hero + page xl */
@@ -128,9 +128,9 @@ p { font-size: var(--fs-body); }
   display: inline-block;
   font-family: var(--sans);
   font-weight: 600;
-  font-size: var(--fs-btn);  /* 15 → 16 */
+  font-size: var(--fs-btn);  /* 13 → 14 */
   letter-spacing: 0.04em;
-  padding: 13px 28px;
+  padding: 10px 22px;
   border-radius: 999px;
   cursor: pointer;
   border: 1.5px solid transparent;
@@ -170,10 +170,10 @@ p { font-size: var(--fs-body); }
 .nav__menu { display: flex; align-items: center; gap: 30px; }
 .nav__link {
   font-size: var(--fs-nav);
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.86);
+  color: rgba(255,255,255,.82);
   transition: color .15s ease;
 }
 .nav__link:hover { color: var(--white); }
@@ -495,7 +495,7 @@ p { font-size: var(--fs-body); }
   margin-bottom: 20px;
 }
 .cta-section__cta {
-  padding: 16px 36px;
+  padding: 13px 30px;
   font-size: var(--fs-btn);
   box-shadow: 0 14px 30px rgba(0,0,0,.18);
 }
@@ -695,7 +695,7 @@ p { font-size: var(--fs-body); }
   text-transform: none; color: var(--muted); line-height: 1.55;
 }
 .field--check a { color: var(--teal); text-decoration: underline; }
-.contact__form .btn { width: 100%; margin-top: 6px; padding: 15px; }
+.contact__form .btn { width: 100%; margin-top: 6px; padding: 13px; }
 .form-msg {
   font-size: var(--fs-body-sm);
   line-height: 1.55;
