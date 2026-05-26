@@ -173,9 +173,9 @@
 
   /* ---------- Contact form ----------
      Submits to Formspree without leaving the page and shows an
-     inline message. Until a real Formspree ID is added (the action
-     still contains "YOUR_FORM_ID"), it degrades gracefully and
-     points visitors to the email address instead.                  */
+     inline status message. Falls back to a "please email us
+     directly" message if the form action is somehow not wired
+     up (defensive — should never trigger in production).      */
   var form = document.querySelector(".contact__form, .form-card");
   var msg = document.getElementById("form-msg");
 
