@@ -508,8 +508,8 @@ p { font-size: var(--fs-body); }
   margin: 0 0 14px;
 }
 .cta-section__btn {
-  min-width: 132px;
-  padding: 13px 32px;
+  min-width: 144px;
+  padding: 14px 36px;
   font-size: var(--fs-btn);
   box-shadow: 0 12px 26px rgba(0,0,0,.16);
 }
@@ -551,8 +551,8 @@ p { font-size: var(--fs-body); }
   .cta-section__btn {
     flex: none;
     min-width: 0;
-    padding: 11px 26px;
-    font-size: 0.875rem;
+    padding: 9px 32px;        /* shorter (less tall) but still wide */
+    font-size: 0.9375rem;     /* slightly bigger label */
     box-shadow: 0 8px 18px rgba(0,0,0,.14);
   }
 }
