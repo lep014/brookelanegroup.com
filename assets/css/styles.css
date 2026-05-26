@@ -445,7 +445,14 @@ p { font-size: var(--fs-body); }
   font-weight: 600;
   color: rgba(255,255,255,.92);
   letter-spacing: 0.02em;
-  margin-bottom: 22px;
+  margin-bottom: 6px;
+}
+.cta-section__bio {
+  max-width: 520px;
+  margin: 0 auto 26px;
+  font-size: var(--fs-body-sm);
+  line-height: 1.55;
+  color: rgba(255,255,255,.72);
 }
 .eyebrow--light { color: rgba(255,255,255,.7); margin-bottom: 14px; }
 .cta-section__title { color: var(--white); margin-bottom: 18px; }
