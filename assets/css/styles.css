@@ -526,19 +526,33 @@ p { font-size: var(--fs-body); }
 }
 
 @media (max-width: 720px) {
+  /* Switch to a centered flex column. The pitch wrapper dissolves
+     so its children become siblings of the person block, then we
+     reorder so the reader sees:
+       1) title  2) body  3) photo + name + bio  4) actions  5) trust
+     The face appears as a "signed by" reveal between the message
+     and the action — never before the reader has context for who
+     is speaking. */
   .cta-section__layout {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    gap: 28px;
+    gap: 0;
     padding: 0 24px;
+    max-width: 520px;
   }
-  .cta-section__person,
-  .cta-section__pitch { text-align: center; }
-  .cta-section__avatar { margin: 0 auto 14px; width: 92px; height: 92px; }
-  .cta-section__bio { margin: 0 auto; }
-  .cta-section__body { margin-left: auto; margin-right: auto; }
-  .cta-section__actions { align-items: center; }
-  .cta-section__title br { display: none; }  /* Let the title wrap naturally on phones */
+  .cta-section__pitch { display: contents; }
+
+  .cta-section__title   { order: 1; margin-bottom: 16px; }
+  .cta-section__body    { order: 2; margin-bottom: 28px; max-width: none; }
+  .cta-section__person  { order: 3; margin-bottom: 28px; text-align: center; }
+  .cta-section__actions { order: 4; margin-bottom: 16px; align-items: center; }
+  .cta-section__trust   { order: 5; }
+
+  .cta-section__avatar  { margin: 0 auto 12px; width: 84px; height: 84px; }
+  .cta-section__bio     { margin: 0 auto; max-width: 360px; }
+  .cta-section__title br { display: none; }
 }
 
 /* ============================================================
