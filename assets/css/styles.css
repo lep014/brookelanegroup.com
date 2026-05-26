@@ -447,42 +447,6 @@ p { font-size: var(--fs-body); }
   text-align: center;
 }
 
-/* Letterhead — small photo + name + bio acting as the "from"
-   block at the top of the letter. */
-.cta-section__letterhead {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: clamp(28px, 3.5vw, 44px);
-}
-.cta-section__avatar {
-  width: 80px; height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 12px;
-  display: block;
-  box-shadow:
-    0 1px 0 rgba(255,255,255,.18) inset,
-    0 14px 28px rgba(0,0,0,.22),
-    0 4px 8px rgba(0,0,0,.16);
-}
-.cta-section__caption {
-  font-family: var(--sans);
-  font-size: var(--fs-footer-body);
-  font-weight: 600;
-  color: rgba(255,255,255,.95);
-  letter-spacing: 0.02em;
-  margin-bottom: 6px;
-}
-.cta-section__bio {
-  font-size: var(--fs-body-sm);
-  line-height: 1.55;
-  color: rgba(255,255,255,.78);
-  margin: 0;
-  max-width: 460px;
-  text-wrap: balance;
-}
-
 /* Headline */
 .cta-section__title {
   color: var(--white);
@@ -495,8 +459,45 @@ p { font-size: var(--fs-body); }
 .cta-section__body {
   color: rgba(255,255,255,.88);
   line-height: var(--lh-body);
-  margin: 0 0 clamp(26px, 3vw, 36px);
+  margin: 0 0 clamp(28px, 3.5vw, 40px);
   text-wrap: pretty;
+}
+
+/* Signature — quieter attribution between the body and action.
+   Smaller photo, lighter bio so it reads as "and this is who's
+   saying it" rather than a full founder section. */
+.cta-section__signature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: clamp(24px, 3vw, 36px);
+}
+.cta-section__avatar {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  display: block;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.16) inset,
+    0 10px 22px rgba(0,0,0,.20),
+    0 3px 6px rgba(0,0,0,.14);
+}
+.cta-section__caption {
+  font-family: var(--sans);
+  font-size: var(--fs-footer-body);
+  font-weight: 600;
+  color: rgba(255,255,255,.92);
+  letter-spacing: 0.02em;
+  margin-bottom: 4px;
+}
+.cta-section__bio {
+  font-size: var(--fs-caption);
+  line-height: 1.5;
+  color: rgba(255,255,255,.58);
+  margin: 0;
+  max-width: 380px;
+  text-wrap: balance;
 }
 
 /* Two centered buttons, two different colors */
