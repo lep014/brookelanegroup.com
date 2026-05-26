@@ -538,10 +538,12 @@ p { font-size: var(--fs-body); }
 @media (max-width: 480px) {
   .cta-section__avatar { width: 48px; height: 48px; }
   .cta-section__btn {
-    min-width: 0;
     flex: none;
-    padding: 10px 24px;
+    min-width: 0;         /* reset desktop's 132px min so 'width' wins */
+    width: 108px;         /* fixed so Email + Call are identical width */
+    padding: 10px 0;
     font-size: 0.8125rem;
+    text-align: center;
     box-shadow: 0 8px 18px rgba(0,0,0,.14);
   }
 }
