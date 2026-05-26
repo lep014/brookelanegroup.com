@@ -520,6 +520,22 @@ p { font-size: var(--fs-body); }
 .page-header p { color: rgba(255,255,255,.8); font-size: var(--fs-title); margin-top: 14px; }
 
 /* ============================================================
+   404 page
+   ============================================================ */
+.not-found {
+  padding: calc(var(--nav-h) + 80px) 0 100px;
+  text-align: center;
+}
+.not-found .container { max-width: 620px; }
+.not-found .lead { margin: 18px 0 32px; }
+.not-found__actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
    Contact
    ============================================================ */
 .contact { padding-top: clamp(40px, 6vw, 72px); }
