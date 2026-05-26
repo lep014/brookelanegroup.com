@@ -501,16 +501,15 @@ p { font-size: var(--fs-body); }
   letter-spacing: 0.01em;
 }
 
-/* Two left-aligned buttons, two different colors */
+/* Single primary action — left-aligned Email pill */
 .cta-section__actions {
   display: flex;
   justify-content: flex-start;
-  gap: 14px;
-  margin: 0 0 22px;
+  margin: 0 0 14px;
 }
 .cta-section__btn {
   min-width: 132px;
-  padding: 13px 28px;
+  padding: 13px 32px;
   font-size: var(--fs-btn);
   box-shadow: 0 12px 26px rgba(0,0,0,.16);
 }
@@ -520,11 +519,23 @@ p { font-size: var(--fs-body); }
   color: var(--teal-cta);
 }
 .cta-section__btn--email:hover { background: var(--white); color: #1c4744; }
-.cta-section__btn--call {
-  background: var(--navy-dark);
-  color: var(--white);
+
+/* "or tap to call" supporting link — number is never visible in
+   the DOM (just lives inside the tel: href), defeating phone-
+   scraping bots while keeping tap-to-dial working for humans. */
+.cta-section__alt {
+  font-size: var(--fs-body-sm);
+  color: rgba(255,255,255,.65);
+  margin: 0;
 }
-.cta-section__btn--call:hover { background: #0e1424; color: var(--white); }
+.cta-section__phone-link {
+  color: var(--white);
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255,255,255,.35);
+  padding-bottom: 1px;
+  transition: border-color .15s ease;
+}
+.cta-section__phone-link:hover { border-color: var(--white); }
 
 /* Trust micro-line */
 .cta-section__trust {
@@ -539,11 +550,9 @@ p { font-size: var(--fs-body); }
   .cta-section__avatar { width: 48px; height: 48px; }
   .cta-section__btn {
     flex: none;
-    min-width: 0;         /* reset desktop's 132px min so 'width' wins */
-    width: 108px;         /* fixed so Email + Call are identical width */
-    padding: 10px 0;
-    font-size: 0.8125rem;
-    text-align: center;
+    min-width: 0;
+    padding: 11px 26px;
+    font-size: 0.875rem;
     box-shadow: 0 8px 18px rgba(0,0,0,.14);
   }
 }
