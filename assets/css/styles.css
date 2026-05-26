@@ -419,18 +419,17 @@ p { font-size: var(--fs-body); }
 
 /* ============================================================
    CTA section — full-bleed teal closing that flows into the
-   navy footer. New composition:
-     - Title centered at top, full width
-     - Two columns underneath: pitch (left), founder bio (right)
-     - Two equally-weighted action buttons centered at the bottom
-       (Email = white pill, Call = navy pill)
-     - Trust micro-line beneath
-   On phones, columns stack with the editorial order
-   (title -> body -> person -> actions -> trust).
+   navy footer. Single confident centered column with a
+   "letterhead" structure (small photo + name + bio at top),
+   then the headline, body, two equally-weighted buttons,
+   and a trust micro-line at the bottom. Reads as a personal
+   letter rather than a multi-column landing-page card —
+   identical structure on desktop and phone (no awkward
+   reflow), just scaled.
    ============================================================ */
 .cta-section {
   background: linear-gradient(160deg, #2E6E6B 0%, #235855 100%);
-  padding: clamp(48px, 6vw, 88px) 0 clamp(56px, 6.5vw, 88px);
+  padding: clamp(56px, 6.5vw, 96px) 0 clamp(56px, 6.5vw, 96px);
   color: var(--white);
   position: relative;
 }
@@ -442,48 +441,25 @@ p { font-size: var(--fs-body); }
   background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
 }
 .cta-section__container {
-  max-width: 880px;
+  max-width: 580px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 24px;
   text-align: center;
 }
 
-/* 1) Title (centered, full width) */
-.cta-section__title {
-  color: var(--white);
-  margin: 0 0 clamp(28px, 3vw, 40px);
-  letter-spacing: -0.005em;
-  text-wrap: balance;
-}
-
-/* 2) Two columns underneath */
-.cta-section__columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(40px, 6vw, 72px);
-  align-items: center;
-  text-align: left;
-  margin-bottom: clamp(32px, 4vw, 48px);
-}
-
-.cta-section__pitch { max-width: 380px; }
-.cta-section__body {
-  color: rgba(255,255,255,.86);
-  line-height: var(--lh-body);
-  margin: 0;
-  text-wrap: pretty;
-}
-
-.cta-section__person {
+/* Letterhead — small photo + name + bio acting as the "from"
+   block at the top of the letter. */
+.cta-section__letterhead {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  margin-bottom: clamp(28px, 3.5vw, 44px);
 }
 .cta-section__avatar {
-  width: 96px; height: 96px;
+  width: 80px; height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   display: block;
   box-shadow:
     0 1px 0 rgba(255,255,255,.18) inset,
@@ -496,18 +472,34 @@ p { font-size: var(--fs-body); }
   font-weight: 600;
   color: rgba(255,255,255,.95);
   letter-spacing: 0.02em;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 .cta-section__bio {
   font-size: var(--fs-body-sm);
   line-height: 1.55;
-  color: rgba(255,255,255,.82);
+  color: rgba(255,255,255,.78);
   margin: 0;
-  max-width: 340px;
+  max-width: 460px;
   text-wrap: balance;
 }
 
-/* 3) Two centered buttons, two different colors */
+/* Headline */
+.cta-section__title {
+  color: var(--white);
+  margin: 0 0 18px;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+}
+
+/* Body */
+.cta-section__body {
+  color: rgba(255,255,255,.88);
+  line-height: var(--lh-body);
+  margin: 0 0 clamp(26px, 3vw, 36px);
+  text-wrap: pretty;
+}
+
+/* Two centered buttons, two different colors */
 .cta-section__actions {
   display: flex;
   justify-content: center;
@@ -532,7 +524,7 @@ p { font-size: var(--fs-body); }
 }
 .cta-section__btn--call:hover { background: #0e1424; color: var(--white); }
 
-/* 4) Trust micro-line */
+/* Trust micro-line */
 .cta-section__trust {
   font-size: var(--fs-caption);
   font-weight: 400;
@@ -541,21 +533,9 @@ p { font-size: var(--fs-body); }
   margin: 0;
 }
 
-@media (max-width: 720px) {
-  /* Stack columns; section is centered already.
-     Order: title -> body -> person -> actions -> trust
-     (already the natural HTML order — just collapse the grid). */
-  .cta-section__columns {
-    grid-template-columns: 1fr;
-    gap: 28px;
-    text-align: center;
-    margin-bottom: 26px;
-  }
-  .cta-section__pitch { max-width: none; margin: 0 auto; }
-  .cta-section__person { align-items: center; text-align: center; }
-  .cta-section__avatar { width: 84px; height: 84px; margin: 0 auto 12px; }
-  .cta-section__bio { margin: 0 auto; }
-  .cta-section__btn { min-width: 0; flex: 1; max-width: 160px; }
+@media (max-width: 480px) {
+  .cta-section__avatar { width: 72px; height: 72px; }
+  .cta-section__btn { min-width: 0; flex: 1; max-width: 160px; padding: 12px 22px; }
 }
 
 /* ============================================================
