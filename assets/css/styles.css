@@ -501,15 +501,19 @@ p { font-size: var(--fs-body); }
   letter-spacing: 0.01em;
 }
 
-/* Single primary action — left-aligned Email pill */
+/* Single primary action — Email pill + "or tap to call" line
+   stacked vertically inside an inline-flex column so the
+   wrapper sizes to the button's width and the alt line is
+   automatically centered under the button. */
 .cta-section__actions {
-  display: flex;
-  justify-content: flex-start;
-  margin: 0 0 14px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
 }
 .cta-section__btn {
   min-width: 144px;
-  padding: 14px 36px;
+  padding: 9px 36px;
   font-size: var(--fs-btn);
   box-shadow: 0 12px 26px rgba(0,0,0,.16);
 }
@@ -526,7 +530,8 @@ p { font-size: var(--fs-body); }
 .cta-section__alt {
   font-size: var(--fs-body-sm);
   color: rgba(255,255,255,.65);
-  margin: 0;
+  margin: 12px 0 0;
+  text-align: center;
 }
 .cta-section__phone-link {
   color: var(--white);
@@ -551,8 +556,8 @@ p { font-size: var(--fs-body); }
   .cta-section__btn {
     flex: none;
     min-width: 0;
-    padding: 9px 32px;        /* shorter (less tall) but still wide */
-    font-size: 0.9375rem;     /* slightly bigger label */
+    padding: 5px 32px;        /* slimmer pill */
+    font-size: 0.9375rem;
     box-shadow: 0 8px 18px rgba(0,0,0,.14);
   }
 }
