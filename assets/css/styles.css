@@ -404,7 +404,7 @@ p { font-size: var(--fs-body); }
   display: flex; flex-direction: column;
   background: var(--white);
 }
-.value-card__num { color: var(--teal); font-weight: 800; font-size: var(--fs-eyebrow); }
+.value-card__num { color: var(--teal); font-family: var(--sans); font-weight: 700; font-size: var(--fs-eyebrow); letter-spacing: 0.02em; }
 /* Fixed gap (not auto) so every body starts at the same height; the h3
    min-height reserves two lines so all titles and the description lines
    below them align across every card. */
