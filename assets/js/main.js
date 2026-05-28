@@ -198,6 +198,13 @@
       msg.hidden = false;
     }
 
+    // Reassembled at runtime so the literal address never appears in
+    // the JS source — same pipe-split scheme as the data-em handler.
+    function emailLink() {
+      var a = ["info", "brookelanegroup.com"].join("@");
+      return '<a href="mail' + 'to:' + a + '">' + a + '</a>';
+    }
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
@@ -205,7 +212,7 @@
       if (form.action.indexOf("YOUR_FORM_ID") !== -1) {
         showMsg("error",
           'Our form isn’t connected just yet. Please email us directly at ' +
-          '<a href="mailto:info@brookelanegroup.com">info@brookelanegroup.com</a>.');
+          emailLink() + '.');
         return;
       }
 
@@ -225,12 +232,12 @@
         } else {
           showMsg("error",
             'Something went wrong sending your message. Please email ' +
-            '<a href="mailto:info@brookelanegroup.com">info@brookelanegroup.com</a>.');
+            emailLink() + '.');
         }
       }).catch(function () {
         showMsg("error",
           'Something went wrong sending your message. Please email ' +
-          '<a href="mailto:info@brookelanegroup.com">info@brookelanegroup.com</a>.');
+          emailLink() + '.');
       }).finally(function () {
         if (btn) { btn.textContent = label; btn.disabled = false; }
       });
